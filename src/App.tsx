@@ -167,7 +167,6 @@ function App() {
               height="100%"
               src="https://www.youtube.com/embed/SxE8f80DFpM"
               title="Falling Slowly"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
@@ -297,6 +296,7 @@ const MemberName = styled.div`
   text-align: center;
   font-weight: bold;
   font-size: 23px;
+  color: #2d261a;
 
   @media (max-width: 490px) {
     font-size: 20px;
