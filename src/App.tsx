@@ -3,6 +3,8 @@ import styled from '@emotion/styled'
 import LogoImage from './assets/logo.png'
 import PostitImage from './assets/postit.png'
 import DefaultProfile from './assets/profile/default.png'
+import BaseProfile from './assets/profile/base.png'
+import DrumProfile from './assets/profile/drum.png'
 import MinchanProfile from './assets/profile/minchan.jpeg'
 import RokwonProfile from './assets/profile/rokwon.jpeg'
 import Typewriter from 'typewriter-effect'
@@ -134,7 +136,7 @@ function App() {
           <MemberContent>
             <PostitWrapper>
               <Postit src={PostitImage} />
-              <OverlayImage src={DefaultProfile} style={{ opacity: playingMember === 'Bassist' ? 0.3 : 1 }} />
+              <OverlayImage src={BaseProfile} style={{ opacity: playingMember === 'Bassist' ? 0.3 : 1 }} />
               {playingMember === 'Bassist' && <PlayingEmoji>🎸</PlayingEmoji>}
               <MemberName>??</MemberName>
               <MemberRole>베이스</MemberRole>
@@ -144,7 +146,7 @@ function App() {
           <MemberContent>
             <PostitWrapper>
               <Postit src={PostitImage} />
-              <OverlayImage src={DefaultProfile} style={{ opacity: playingMember === 'Drummer' ? 0.3 : 1 }} />
+              <OverlayImage src={DrumProfile} style={{ opacity: playingMember === 'Drummer' ? 0.3 : 1 }} />
               {playingMember === 'Drummer' && <PlayingEmoji>🥁</PlayingEmoji>}
               <MemberName>??</MemberName>
               <MemberRole>드럼</MemberRole>
