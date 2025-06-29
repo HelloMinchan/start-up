@@ -116,20 +116,42 @@ function App() {
               <Postit src={PostitImage} />
               <OverlayImage src={MinchanProfile} style={{ opacity: playingMember === '정민찬' ? 0.3 : 1 }} />
               {playingMember === '정민찬' && <PlayingEmoji>🎹</PlayingEmoji>}
-              <MemberName>정민찬</MemberName>
-              <MemberRole>(Keyboardist)</MemberRole>
+              <MemberName>민찬</MemberName>
+              <MemberRole>키보드</MemberRole>
             </PostitWrapper>
           </MemberContent>
+
           <MemberContent onClick={() => playSound(RokwonSound, '김록원')}>
             <PostitWrapper>
               <Postit src={PostitImage} />
               <OverlayImage src={RokwonProfile} style={{ opacity: playingMember === '김록원' ? 0.3 : 1 }} />
               {playingMember === '김록원' && <PlayingEmoji>🎸</PlayingEmoji>}
-              <MemberName>김록원</MemberName>
-              <MemberRole>(Guitarist)</MemberRole>
+              <MemberName>록원</MemberName>
+              <MemberRole>기타</MemberRole>
             </PostitWrapper>
           </MemberContent>
+
           <MemberContent>
+            <PostitWrapper>
+              <Postit src={PostitImage} />
+              <OverlayImage src={DefaultProfile} style={{ opacity: playingMember === 'Bassist' ? 0.3 : 1 }} />
+              {playingMember === 'Bassist' && <PlayingEmoji>🎸</PlayingEmoji>}
+              <MemberName>??</MemberName>
+              <MemberRole>베이스</MemberRole>
+            </PostitWrapper>
+          </MemberContent>
+
+          <MemberContent>
+            <PostitWrapper>
+              <Postit src={PostitImage} />
+              <OverlayImage src={DefaultProfile} style={{ opacity: playingMember === 'Drummer' ? 0.3 : 1 }} />
+              {playingMember === 'Drummer' && <PlayingEmoji>🥁</PlayingEmoji>}
+              <MemberName>??</MemberName>
+              <MemberRole>드럼</MemberRole>
+            </PostitWrapper>
+          </MemberContent>
+
+          {/* <MemberContent>
             <PostitWrapper>
               <Postit src={PostitImage} />
               <OverlayImage src={DefaultProfile} style={{ opacity: playingMember === 'Vocalist' ? 0.3 : 1 }} />
@@ -137,30 +159,13 @@ function App() {
               <MemberName>???</MemberName>
               <MemberRole>(Vocalist)</MemberRole>
             </PostitWrapper>
-          </MemberContent>
-          <MemberContent>
-            <PostitWrapper>
-              <Postit src={PostitImage} />
-              <OverlayImage src={DefaultProfile} style={{ opacity: playingMember === 'Bassist' ? 0.3 : 1 }} />
-              {playingMember === 'Bassist' && <PlayingEmoji>🎸</PlayingEmoji>}
-              <MemberName>???</MemberName>
-              <MemberRole>(Bassist)</MemberRole>
-            </PostitWrapper>
-          </MemberContent>
-          <MemberContent>
-            <PostitWrapper>
-              <Postit src={PostitImage} />
-              <OverlayImage src={DefaultProfile} style={{ opacity: playingMember === 'Drummer' ? 0.3 : 1 }} />
-              {playingMember === 'Drummer' && <PlayingEmoji>🥁</PlayingEmoji>}
-              <MemberName>???</MemberName>
-              <MemberRole>(Drummer)</MemberRole>
-            </PostitWrapper>
-          </MemberContent>
+          </MemberContent> */}
         </MemberSection>
 
         <SectionTitle>플레이리스트</SectionTitle>
         <TrackSection>
           <TrackTitle>#Track 1. Falling Slowly</TrackTitle>
+          <TrackDescription>(✅ 완곡, 25.01.12 ~ 25.06.29)</TrackDescription>
           <VideoWrapper>
             <iframe
               width="100%"
@@ -171,6 +176,25 @@ function App() {
               allowFullScreen
             />
           </VideoWrapper>
+        </TrackSection>
+
+        <TrackSection>
+          <TrackTitle>#Track 2. 예뻤어</TrackTitle>
+          <TrackDescription>(🔥 연습, 25.07.02 ~)</TrackDescription>
+          <VideoWrapper>
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/xejMrLT0Q7M?si=2kZJLgnLTTk3l8ag"
+              title="예뻤어"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </VideoWrapper>
+        </TrackSection>
+
+        <TrackSection>
+          <TrackTitle>#Track ...</TrackTitle>
         </TrackSection>
       </Layout>
     </Container>
@@ -191,6 +215,7 @@ const Container = styled.div`
 const Layout = styled.div`
   width: 100%;
   max-width: 1080px;
+  margin-bottom: 50px;
 `
 
 const Head = styled.div`
@@ -198,11 +223,19 @@ const Head = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 490px) {
+    margin-top: 50px;
+  }
 `
 const Logo = styled.img`
   width: 50%;
   max-width: 300px;
   object-fit: contain;
+
+  @media (max-width: 490px) {
+    width: 55vw;
+  }
 `
 
 const Description = styled.div`
@@ -225,7 +258,7 @@ const SectionTitle = styled.div`
   flex-direction: column;
   align-items: center;
 
-  font-size: 23px;
+  font-size: 30px;
   font-weight: 500;
   color: #257180;
 
@@ -287,6 +320,7 @@ const OverlayImage = styled.img`
   width: 75%;
   max-width: 300px;
   pointer-events: none;
+  border-radius: 5px;
 `
 
 const MemberName = styled.div`
@@ -345,6 +379,12 @@ const TrackTitle = styled.div`
   font-size: 20px;
   font-weight: 500;
   color: #2d261a;
+  margin-bottom: 5px;
+`
+const TrackDescription = styled.div`
+  font-size: 18px;
+  font-weight: 500;
+  color: #868282;
   margin-bottom: 20px;
 `
 
@@ -352,5 +392,9 @@ const VideoWrapper = styled.div`
   width: 100%;
   max-width: 800px;
   aspect-ratio: 16/9;
-  margin-bottom: 100px;
+  margin-bottom: 70px;
+
+  @media (max-width: 490px) {
+    margin-bottom: 15px;
+  }
 `
