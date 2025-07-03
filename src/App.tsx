@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
-import LogoImage from './assets/logo.png'
+import LogoImage from './assets/logo-white.png'
 import PostitImage from './assets/postit.png'
-import BaseProfile from './assets/profile/base.png'
 import DrumProfile from './assets/profile/drum.png'
-import MinchanProfile from './assets/profile/minchan.jpeg'
-import RokwonProfile from './assets/profile/rokwon.jpeg'
+import MinchanProfile from './assets/profile/minchan.png'
+import RokwonProfile from './assets/profile/rokwon.png'
+import TaejinProfile from './assets/profile/taejin.png'
 import Typewriter from 'typewriter-effect'
 import MinchanSound from './assets/sound/minchan.m4a'
 import RokwonSound from './assets/sound/rokwon.m4a'
@@ -135,9 +135,9 @@ function App() {
           <MemberContent>
             <PostitWrapper>
               <Postit src={PostitImage} />
-              <OverlayImage src={BaseProfile} style={{ opacity: playingMember === 'Bassist' ? 0.3 : 1 }} />
+              <OverlayImage src={TaejinProfile} style={{ opacity: playingMember === 'Bassist' ? 0.3 : 1 }} />
               {playingMember === 'Bassist' && <PlayingEmoji>🎸</PlayingEmoji>}
-              <MemberName>??</MemberName>
+              <MemberName>태진</MemberName>
               <MemberRole>베이스</MemberRole>
             </PostitWrapper>
           </MemberContent>
@@ -207,7 +207,8 @@ export default App
 const Container = styled.div`
   width: 100%;
   min-height: 100%;
-  background-color: #f4eae0;
+  /* background-color: #f4eae0; */
+  background-color: #373535;
   padding: 0 7%;
   display: flex;
   flex-direction: column;
@@ -248,7 +249,8 @@ const Description = styled.div`
   align-items: center;
   font-weight: 500;
   font-size: 23px;
-  color: #2d261a;
+  /* color: #2d261a; */
+  color: white;
 `
 
 const SectionTitle = styled.div`
@@ -261,7 +263,8 @@ const SectionTitle = styled.div`
 
   font-size: 30px;
   font-weight: 500;
-  color: #257180;
+  /* color: #257180; */
+  color: white;
 
   @media (max-width: 490px) {
     margin-top: 50px;
@@ -379,13 +382,15 @@ const TrackSection = styled.div`
 const TrackTitle = styled.div`
   font-size: 20px;
   font-weight: 500;
-  color: #2d261a;
+  /* color: #2d261a; */
+  color: white;
   margin-bottom: 5px;
 `
 const TrackDescription = styled.div`
   font-size: 18px;
   font-weight: 500;
-  color: #868282;
+  /* color: #868282; */
+  color: white;
   margin-bottom: 20px;
 `
 
