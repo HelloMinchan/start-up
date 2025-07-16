@@ -9,6 +9,17 @@ import TaejinProfile from './assets/profile/taejin.png'
 import Typewriter from 'typewriter-effect'
 import MinchanSound from './assets/sound/minchan.m4a'
 import RokwonSound from './assets/sound/rokwon.m4a'
+import TaejinSound from './assets/sound/taejin.mp3'
+
+import Track2Week2 from './assets/sound/track2/week2.m4a'
+import Track2Week3 from './assets/sound/track2/week3.m4a'
+
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite'
+import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled'
 
 function App() {
   const [isVisible, setIsVisible] = useState(false)
@@ -112,31 +123,31 @@ function App() {
 
         <SectionTitle>멤버</SectionTitle>
         <MemberSection>
-          <MemberContent onClick={() => playSound(MinchanSound, '정민찬')}>
+          <MemberContent onClick={() => playSound(MinchanSound, '민찬')}>
             <PostitWrapper>
               <Postit src={PostitImage} />
-              <OverlayImage src={MinchanProfile} style={{ opacity: playingMember === '정민찬' ? 0.3 : 1 }} />
-              {playingMember === '정민찬' && <PlayingEmoji>🎹</PlayingEmoji>}
+              <OverlayImage src={MinchanProfile} style={{ opacity: playingMember === '민찬' ? 0.3 : 1 }} />
+              {playingMember === '민찬' && <PlayingEmoji>🎹</PlayingEmoji>}
               <MemberName>민찬</MemberName>
               <MemberRole>키보드</MemberRole>
             </PostitWrapper>
           </MemberContent>
 
-          <MemberContent onClick={() => playSound(RokwonSound, '김록원')}>
+          <MemberContent onClick={() => playSound(RokwonSound, '록원')}>
             <PostitWrapper>
               <Postit src={PostitImage} />
-              <OverlayImage src={RokwonProfile} style={{ opacity: playingMember === '김록원' ? 0.3 : 1 }} />
-              {playingMember === '김록원' && <PlayingEmoji>🎸</PlayingEmoji>}
+              <OverlayImage src={RokwonProfile} style={{ opacity: playingMember === '록원' ? 0.3 : 1 }} />
+              {playingMember === '록원' && <PlayingEmoji>🎸</PlayingEmoji>}
               <MemberName>록원</MemberName>
               <MemberRole>기타</MemberRole>
             </PostitWrapper>
           </MemberContent>
 
-          <MemberContent>
+          <MemberContent onClick={() => playSound(TaejinSound, '태진')}>
             <PostitWrapper>
               <Postit src={PostitImage} />
-              <OverlayImage src={TaejinProfile} style={{ opacity: playingMember === 'Bassist' ? 0.3 : 1 }} />
-              {playingMember === 'Bassist' && <PlayingEmoji>🎸</PlayingEmoji>}
+              <OverlayImage src={TaejinProfile} style={{ opacity: playingMember === '태진' ? 0.3 : 1 }} />
+              {playingMember === '태진' && <PlayingEmoji>🎸</PlayingEmoji>}
               <MemberName>태진</MemberName>
               <MemberRole>베이스</MemberRole>
             </PostitWrapper>
@@ -192,6 +203,39 @@ function App() {
               allowFullScreen
             />
           </VideoWrapper>
+
+          <PracticeHistoryContainer>
+            <PracticeHistory>
+              <AccordionSummary expandIcon={<ExpandMoreIcon style={{ color: '#2d261a' }} />}>
+                <div style={{ fontWeight: 'bold', color: '#2d261a' }}>연습 기록</div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <PracticeHistoryListItem>
+                  <div style={{ display: 'flex', alignItems: 'center', color: '#2d261a' }}>2주차 (25.07.09)</div>
+                  <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week2, 'Track2Week2')}>
+                    {playingMember === 'Track2Week2' ? (
+                      <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
+                    ) : (
+                      <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
+                    )}
+                  </div>
+                </PracticeHistoryListItem>
+
+                <PracticeHistoryListItemSeperator />
+
+                <PracticeHistoryListItem>
+                  <div style={{ display: 'flex', color: '#2d261a' }}>3주차 (25.07.16)</div>
+                  <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week3, 'Track2Week3')}>
+                    {playingMember === 'Track2Week3' ? (
+                      <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
+                    ) : (
+                      <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
+                    )}
+                  </div>
+                </PracticeHistoryListItem>
+              </AccordionDetails>
+            </PracticeHistory>
+          </PracticeHistoryContainer>
         </TrackSection>
 
         <TrackSection>
@@ -403,4 +447,26 @@ const VideoWrapper = styled.div`
   @media (max-width: 490px) {
     margin-bottom: 15px;
   }
+`
+
+const PracticeHistoryContainer = styled.div`
+  width: 100%;
+  max-width: 800px;
+  margin-top: -40px;
+
+  @media (max-width: 490px) {
+    margin-top: 0px;
+  }
+`
+
+const PracticeHistory = styled(Accordion)`
+  background-color: #f1f1ef;
+  border-radius: 0px;
+`
+const PracticeHistoryListItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+const PracticeHistoryListItemSeperator = styled.div`
+  height: 15px;
 `
