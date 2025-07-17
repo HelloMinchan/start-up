@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import LogoImage from './assets/logo-white.png'
 import PostitImage from './assets/postit.png'
-import DrumProfile from './assets/profile/drum.png'
 import MinchanProfile from './assets/profile/minchan.png'
 import RokwonProfile from './assets/profile/rokwon.png'
 import TaejinProfile from './assets/profile/taejin.png'
+import DoyeonProfile from './assets/profile/doyeon.png'
 import Typewriter from 'typewriter-effect'
 import MinchanSound from './assets/sound/minchan.m4a'
 import RokwonSound from './assets/sound/rokwon.m4a'
@@ -129,7 +129,7 @@ function App() {
               <OverlayImage src={MinchanProfile} style={{ opacity: playingMember === '민찬' ? 0.3 : 1 }} />
               {playingMember === '민찬' && <PlayingEmoji>🎹</PlayingEmoji>}
               <MemberName>민찬</MemberName>
-              <MemberRole>키보드</MemberRole>
+              <MemberRole>키보드 / 신디사이저</MemberRole>
             </PostitWrapper>
           </MemberContent>
 
@@ -156,9 +156,9 @@ function App() {
           <MemberContent>
             <PostitWrapper>
               <Postit src={PostitImage} />
-              <OverlayImage src={DrumProfile} style={{ opacity: playingMember === 'Drummer' ? 0.3 : 1 }} />
+              <OverlayImage src={DoyeonProfile} style={{ opacity: playingMember === 'Drummer' ? 0.3 : 1 }} />
               {playingMember === 'Drummer' && <PlayingEmoji>🥁</PlayingEmoji>}
-              <MemberName>??</MemberName>
+              <MemberName>도연</MemberName>
               <MemberRole>드럼</MemberRole>
             </PostitWrapper>
           </MemberContent>
