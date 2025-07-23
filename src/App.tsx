@@ -240,7 +240,7 @@ function App() {
                 <PracticeHistoryListItem>
                   <div style={{ display: 'flex', color: '#2d261a' }}>4주차 (25.07.23)</div>
                   <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week4, 'Track2Week4')}>
-                    {playingMember === 'Track2Week3' ? (
+                    {playingMember === 'Track2Week4' ? (
                       <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
                     ) : (
                       <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
