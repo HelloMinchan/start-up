@@ -13,6 +13,7 @@ import TaejinSound from './assets/sound/taejin.mp3'
 
 import Track2Week2 from './assets/sound/track2/week2.m4a'
 import Track2Week3 from './assets/sound/track2/week3.m4a'
+import Track2Week4 from './assets/sound/track2/week4.m4a'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -211,7 +212,7 @@ function App() {
               </AccordionSummary>
               <AccordionDetails>
                 <PracticeHistoryListItem>
-                  <div style={{ display: 'flex', alignItems: 'center', color: '#2d261a' }}>2주차 (25.07.09)</div>
+                  <div style={{ display: 'flex', color: '#2d261a' }}>2주차 (25.07.09)</div>
                   <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week2, 'Track2Week2')}>
                     {playingMember === 'Track2Week2' ? (
                       <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
@@ -226,6 +227,19 @@ function App() {
                 <PracticeHistoryListItem>
                   <div style={{ display: 'flex', color: '#2d261a' }}>3주차 (25.07.16)</div>
                   <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week3, 'Track2Week3')}>
+                    {playingMember === 'Track2Week3' ? (
+                      <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
+                    ) : (
+                      <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
+                    )}
+                  </div>
+                </PracticeHistoryListItem>
+
+                <PracticeHistoryListItemSeperator />
+
+                <PracticeHistoryListItem>
+                  <div style={{ display: 'flex', color: '#2d261a' }}>4주차 (25.07.23)</div>
+                  <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week4, 'Track2Week4')}>
                     {playingMember === 'Track2Week3' ? (
                       <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
                     ) : (
@@ -468,5 +482,5 @@ const PracticeHistoryListItem = styled.div`
   justify-content: space-between;
 `
 const PracticeHistoryListItemSeperator = styled.div`
-  height: 15px;
+  height: 13px;
 `
