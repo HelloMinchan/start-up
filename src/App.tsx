@@ -29,6 +29,7 @@ function App() {
   const [isVisible3, setIsVisible3] = useState(false)
   const [playingMember, setPlayingMember] = useState<string | null>(null)
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null)
+  const [progress, setProgress] = useState<number>(0)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -70,6 +71,14 @@ function App() {
       setPlayingMember(null)
       setCurrentAudio(null)
     })
+    audio.addEventListener('timeupdate', () => {
+      const currentTime = audio.currentTime
+      const duration = audio.duration
+      if (duration > 0) {
+        setProgress((currentTime / duration) * 100)
+      }
+    })
+
     setCurrentAudio(audio)
     setPlayingMember(memberName)
   }
@@ -222,7 +231,14 @@ function App() {
               </AccordionSummary>
               <AccordionDetails>
                 <PracticeHistoryListItem>
-                  <div style={{ display: 'flex', color: '#2d261a' }}>2주차 (25.07.09)</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ color: '#2d261a' }}>2주차 (25.07.09)</div>
+                    {playingMember === 'Track2Week2' && (
+                      <ProgressBarContainer>
+                        <ProgressBar style={{ width: `${progress}%` }} />
+                      </ProgressBarContainer>
+                    )}
+                  </div>
                   <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week2, 'Track2Week2')}>
                     {playingMember === 'Track2Week2' ? (
                       <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
@@ -235,7 +251,14 @@ function App() {
                 <PracticeHistoryListItemSeperator />
 
                 <PracticeHistoryListItem>
-                  <div style={{ display: 'flex', color: '#2d261a' }}>3주차 (25.07.16)</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ color: '#2d261a' }}>3주차 (25.07.16)</div>
+                    {playingMember === 'Track2Week3' && (
+                      <ProgressBarContainer>
+                        <ProgressBar style={{ width: `${progress}%` }} />
+                      </ProgressBarContainer>
+                    )}
+                  </div>
                   <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week3, 'Track2Week3')}>
                     {playingMember === 'Track2Week3' ? (
                       <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
@@ -248,7 +271,14 @@ function App() {
                 <PracticeHistoryListItemSeperator />
 
                 <PracticeHistoryListItem>
-                  <div style={{ display: 'flex', color: '#2d261a' }}>4주차 (25.07.23)</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ color: '#2d261a' }}>4주차 (25.07.23)</div>
+                    {playingMember === 'Track2Week4' && (
+                      <ProgressBarContainer>
+                        <ProgressBar style={{ width: `${progress}%` }} />
+                      </ProgressBarContainer>
+                    )}
+                  </div>
                   <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week4, 'Track2Week4')}>
                     {playingMember === 'Track2Week4' ? (
                       <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
@@ -261,7 +291,14 @@ function App() {
                 <PracticeHistoryListItemSeperator />
 
                 <PracticeHistoryListItem>
-                  <div style={{ display: 'flex', color: '#2d261a' }}>5주차 (25.07.30)</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ color: '#2d261a' }}>5주차 (25.07.30)</div>
+                    {playingMember === 'Track2Week5' && (
+                      <ProgressBarContainer>
+                        <ProgressBar style={{ width: `${progress}%` }} />
+                      </ProgressBarContainer>
+                    )}
+                  </div>
                   <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week5, 'Track2Week5')}>
                     {playingMember === 'Track2Week5' ? (
                       <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
@@ -530,4 +567,19 @@ const PracticeHistoryListItem = styled.div`
 `
 const PracticeHistoryListItemSeperator = styled.div`
   height: 13px;
+`
+const ProgressBarContainer = styled.div`
+  width: calc(100% - 10px);
+
+  height: 6px;
+  background-color: #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 6px;
+`
+
+const ProgressBar = styled.div`
+  height: 100%;
+  background-color: #2d261a;
+  transition: width 0.2s ease;
 `
