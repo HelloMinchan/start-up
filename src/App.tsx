@@ -14,6 +14,7 @@ import TaejinSound from './assets/sound/taejin.mp3'
 import Track2Week2 from './assets/sound/track2/week2.m4a'
 import Track2Week3 from './assets/sound/track2/week3.m4a'
 import Track2Week4 from './assets/sound/track2/week4.m4a'
+import Track2Week5 from './assets/sound/track2/week5.m4a'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -189,11 +190,20 @@ function App() {
               allowFullScreen
             />
           </VideoWrapper>
+
+          <PracticeHistoryContainer>
+            <PracticeHistory>
+              <AccordionSummary expandIcon={<ExpandMoreIcon style={{ color: '#2d261a' }} />}>
+                <div style={{ fontWeight: 'bold', color: '#2d261a' }}>연습 기록</div>
+              </AccordionSummary>
+              <AccordionDetails>연습을 기록할 경황이 없었던 시절..</AccordionDetails>
+            </PracticeHistory>
+          </PracticeHistoryContainer>
         </TrackSection>
 
         <TrackSection>
           <TrackTitle>#Track 2. 예뻤어</TrackTitle>
-          <TrackDescription>(🔥 연습, 25.07.02 ~)</TrackDescription>
+          <TrackDescription>(✅ 완곡, 25.07.02 ~ 25.07.30)</TrackDescription>
           <VideoWrapper>
             <iframe
               width="100%"
@@ -247,7 +257,44 @@ function App() {
                     )}
                   </div>
                 </PracticeHistoryListItem>
+
+                <PracticeHistoryListItemSeperator />
+
+                <PracticeHistoryListItem>
+                  <div style={{ display: 'flex', color: '#2d261a' }}>5주차 (25.07.30)</div>
+                  <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track2Week5, 'Track2Week5')}>
+                    {playingMember === 'Track2Week5' ? (
+                      <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
+                    ) : (
+                      <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
+                    )}
+                  </div>
+                </PracticeHistoryListItem>
               </AccordionDetails>
+            </PracticeHistory>
+          </PracticeHistoryContainer>
+        </TrackSection>
+
+        <TrackSection>
+          <TrackTitle>#Track 3. HAPPY</TrackTitle>
+          <TrackDescription>(🔥 연습, 25.08.07 ~)</TrackDescription>
+          <VideoWrapper>
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/sWXGbkM0tBI?si=L5CtzIV487r-juBs"
+              title="예뻤어"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </VideoWrapper>
+
+          <PracticeHistoryContainer>
+            <PracticeHistory>
+              <AccordionSummary expandIcon={<ExpandMoreIcon style={{ color: '#2d261a' }} />}>
+                <div style={{ fontWeight: 'bold', color: '#2d261a' }}>연습 기록</div>
+              </AccordionSummary>
+              <AccordionDetails></AccordionDetails>
             </PracticeHistory>
           </PracticeHistoryContainer>
         </TrackSection>
@@ -431,7 +478,7 @@ const PlayingEmoji = styled.div`
 
 const TrackSection = styled.div`
   width: 100%;
-  margin-top: 30px;
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
