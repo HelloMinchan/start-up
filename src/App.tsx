@@ -453,6 +453,7 @@ const MemberContent = styled.div`
   height: 330px;
   display: flex;
   cursor: pointer;
+  position: relative;
 
   @media (max-width: 490px) {
     max-width: 140px;
