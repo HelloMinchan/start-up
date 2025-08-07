@@ -16,6 +16,8 @@ import Track2Week3 from './assets/sound/track2/week3.m4a'
 import Track2Week4 from './assets/sound/track2/week4.m4a'
 import Track2Week5 from './assets/sound/track2/week5.m4a'
 
+import Track3Week1 from './assets/sound/track3/week1.m4a'
+
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
@@ -313,14 +315,14 @@ function App() {
         </TrackSection>
 
         <TrackSection>
-          <TrackTitle>#Track 3. HAPPY</TrackTitle>
+          <TrackTitle>#Track 3. 박하사탕</TrackTitle>
           <TrackDescription>(🔥 연습, 25.08.07 ~)</TrackDescription>
           <VideoWrapper>
             <iframe
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/sWXGbkM0tBI?si=L5CtzIV487r-juBs"
-              title="예뻤어"
+              src="https://www.youtube.com/embed/fDQzDsAW434?si=plBauuN_dba4V8E1"
+              title="박하사탕"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
@@ -331,7 +333,25 @@ function App() {
               <AccordionSummary expandIcon={<ExpandMoreIcon style={{ color: '#2d261a' }} />}>
                 <div style={{ fontWeight: 'bold', color: '#2d261a' }}>연습 기록</div>
               </AccordionSummary>
-              <AccordionDetails></AccordionDetails>
+              <AccordionDetails>
+                <PracticeHistoryListItem>
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ color: '#2d261a' }}>1주차 (25.08.07)</div>
+                    {playingMember === 'Track3Week1' && (
+                      <ProgressBarContainer>
+                        <ProgressBar style={{ width: `${progress}%` }} />
+                      </ProgressBarContainer>
+                    )}
+                  </div>
+                  <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track3Week1, 'Track3Week1')}>
+                    {playingMember === 'Track3Week1' ? (
+                      <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
+                    ) : (
+                      <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
+                    )}
+                  </div>
+                </PracticeHistoryListItem>
+              </AccordionDetails>
             </PracticeHistory>
           </PracticeHistoryContainer>
         </TrackSection>
