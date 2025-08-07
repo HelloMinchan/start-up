@@ -464,7 +464,6 @@ const PostitWrapper = styled.div`
   width: 100%;
   max-width: 200px;
   height: 330px;
-  /* aspect-ratio: 1; */
 
   @media (max-width: 490px) {
     max-width: 140px;
@@ -482,7 +481,7 @@ const Postit = styled.img`
 `
 const OverlayImage = styled.img`
   position: absolute;
-  top: 52%;
+  top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 75%;
@@ -493,7 +492,7 @@ const OverlayImage = styled.img`
 
 const MemberName = styled.div`
   position: absolute;
-  bottom: 43px;
+  bottom: 37px;
   width: 100%;
   text-align: center;
   font-weight: bold;
@@ -502,13 +501,13 @@ const MemberName = styled.div`
 
   @media (max-width: 490px) {
     font-size: 20px;
-    bottom: 35px;
+    bottom: 31px;
   }
 `
 
 const MemberRole = styled.div`
   position: absolute;
-  bottom: 18px;
+  bottom: 13px;
   width: 100%;
   text-align: center;
   color: #868282;
@@ -517,7 +516,7 @@ const MemberRole = styled.div`
 
   @media (max-width: 490px) {
     font-size: 14px;
-    bottom: 15px;
+    bottom: 12px;
   }
 `
 
