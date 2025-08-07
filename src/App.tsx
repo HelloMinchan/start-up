@@ -451,7 +451,6 @@ const MemberContent = styled.div`
   width: 100%;
   max-width: 200px;
   height: 330px;
-  display: flex;
   cursor: pointer;
   position: relative;
 
@@ -483,7 +482,7 @@ const Postit = styled.img`
 `
 const OverlayImage = styled.img`
   position: absolute;
-  top: 53%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 75%;
@@ -494,7 +493,7 @@ const OverlayImage = styled.img`
 
 const MemberName = styled.div`
   position: absolute;
-  bottom: 40px;
+  bottom: 43px;
   width: 100%;
   text-align: center;
   font-weight: bold;
@@ -503,13 +502,13 @@ const MemberName = styled.div`
 
   @media (max-width: 490px) {
     font-size: 20px;
-    bottom: 32px;
+    bottom: 35px;
   }
 `
 
 const MemberRole = styled.div`
   position: absolute;
-  bottom: 15px;
+  bottom: 18px;
   width: 100%;
   text-align: center;
   color: #868282;
@@ -518,7 +517,7 @@ const MemberRole = styled.div`
 
   @media (max-width: 490px) {
     font-size: 14px;
-    bottom: 13px;
+    bottom: 15px;
   }
 `
 
