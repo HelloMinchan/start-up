@@ -463,17 +463,17 @@ const PostitWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 200px;
-  aspect-ratio: 1;
+  height: 330px;
+  /* aspect-ratio: 1; */
 
   @media (max-width: 490px) {
     max-width: 140px;
+    height: 250px;
   }
 `
 const Postit = styled.img`
   max-width: 200px;
   height: 330px;
-
-  position: relative;
 
   @media (max-width: 490px) {
     max-width: 140px;
