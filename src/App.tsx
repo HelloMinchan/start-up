@@ -434,7 +434,6 @@ const SectionTitle = styled.div`
 `
 const MemberSection = styled.div`
   width: 100%;
-  height: auto;
   margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -451,11 +450,13 @@ const MemberSection = styled.div`
 const MemberContent = styled.div`
   width: 100%;
   max-width: 200px;
+  height: 330px;
   display: flex;
   cursor: pointer;
 
   @media (max-width: 490px) {
     max-width: 140px;
+    height: 250px;
   }
 `
 const PostitWrapper = styled.div`
@@ -492,7 +493,7 @@ const OverlayImage = styled.img`
 
 const MemberName = styled.div`
   position: absolute;
-  bottom: 47px;
+  bottom: 40px;
   width: 100%;
   text-align: center;
   font-weight: bold;
@@ -501,13 +502,13 @@ const MemberName = styled.div`
 
   @media (max-width: 490px) {
     font-size: 20px;
-    bottom: 37px;
+    bottom: 32px;
   }
 `
 
 const MemberRole = styled.div`
   position: absolute;
-  bottom: 23px;
+  bottom: 15px;
   width: 100%;
   text-align: center;
   color: #868282;
@@ -516,7 +517,7 @@ const MemberRole = styled.div`
 
   @media (max-width: 490px) {
     font-size: 14px;
-    bottom: 17px;
+    bottom: 13px;
   }
 `
 
