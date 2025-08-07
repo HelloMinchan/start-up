@@ -434,6 +434,7 @@ const SectionTitle = styled.div`
 `
 const MemberSection = styled.div`
   width: 100%;
+  height: auto;
   margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
