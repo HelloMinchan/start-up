@@ -17,6 +17,7 @@ import Track2Week4 from './assets/sound/track2/week4.m4a'
 import Track2Week5 from './assets/sound/track2/week5.m4a'
 
 import Track3Week1 from './assets/sound/track3/week1.m4a'
+import Track3Week2 from './assets/sound/track3/week2.m4a'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -345,6 +346,26 @@ function App() {
                   </div>
                   <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track3Week1, 'Track3Week1')}>
                     {playingMember === 'Track3Week1' ? (
+                      <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
+                    ) : (
+                      <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
+                    )}
+                  </div>
+                </PracticeHistoryListItem>
+
+                <PracticeHistoryListItemSeperator />
+
+                <PracticeHistoryListItem>
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ color: '#2d261a' }}>2주차 (25.08.20)</div>
+                    {playingMember === 'Track3Week2' && (
+                      <ProgressBarContainer>
+                        <ProgressBar style={{ width: `${progress}%` }} />
+                      </ProgressBarContainer>
+                    )}
+                  </div>
+                  <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(Track3Week2, 'Track3Week2')}>
+                    {playingMember === 'Track3Week2' ? (
                       <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
                     ) : (
                       <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
