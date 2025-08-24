@@ -134,22 +134,35 @@ function App() {
           {Object.entries(MEMBERS).map(([key, member], index) => (
             <MemberContent 
               key={key}
+              data-member={key}
+              className={`member-card member-${key}`}
               onClick={() => member.sound && playSound(member.sound, member.name)}
               style={{
-                animation: `stickerStickIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.3}s both`,
+                animation: `cardSlideIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.2}s both`,
                 opacity: 0,
-                transform: 'scale(0.6) rotate(-8deg) translateY(30px)',
+                transform: 'translateY(40px) scale(0.8)',
               }}
             >
               <PostitWrapper>
-                <Postit src={POSTIT_IMAGES.postit} />
+                <Postit />
                 <OverlayImage 
-                  src={member.profile} 
+                  data-member={key}
+                  className={`member-${key}`}
                   style={{ opacity: playingMember === member.name ? 0.3 : 1 }} 
-                />
+                >
+                  <img 
+                    src={member.profile} 
+                    alt={member.name}
+                  />
+                  <MemberIcon>{member.emoji}</MemberIcon>
+                </OverlayImage>
                 {playingMember === member.name && <PlayingEmoji>{member.emoji}</PlayingEmoji>}
                 <MemberName>{member.name}</MemberName>
-                <MemberRole>{member.role}</MemberRole>
+                <MemberStats>
+                  <StatItem>
+                    <StatValue>#{member.role}</StatValue>
+                  </StatItem>
+                </MemberStats>
               </PostitWrapper>
             </MemberContent>
           ))}
@@ -273,47 +286,64 @@ const Description = styled.div`
 const SectionTitle = styled.div`
   width: 100%;
   margin-top: 70px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  font-size: 30px;
-  font-weight: 500;
-  /* color: #257180; */
+  font-size: 32px;
+  font-weight: 700;
   color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+  }
 
   @media (max-width: 490px) {
     margin-top: 50px;
+    font-size: 28px;
   }
 `
 const MemberSection = styled.div`
   width: 100%;
   margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
   justify-items: center;
 
   @media (max-width: 490px) {
     margin-top: 20px;
-    grid-template-columns: repeat(2, 140px);
+    grid-template-columns: repeat(2, 160px);
+    gap: 16px;
     justify-content: center;
   }
 `
 
 const MemberContent = styled.div`
   width: 100%;
-  max-width: 200px;
-  height: 330px;
+  max-width: 220px;
+  height: 320px;
   cursor: pointer;
   position: relative;
-
-  @media (max-width: 490px) {
-    max-width: 140px;
-    height: 250px;
-  }
-
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
   /* 스티커 붙이는 애니메이션 */
   @keyframes stickerStickIn {
     0% {
@@ -330,109 +360,321 @@ const MemberContent = styled.div`
     }
   }
 
+  /* 카드 등장 애니메이션 */
+  @keyframes cardSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(40px) scale(0.8);
+    }
+    60% {
+      opacity: 0.9;
+      transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+  }
+
   /* 호버 효과 */
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  
   &:hover {
-    transform: scale(1.03) translateY(-3px);
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.3),
+      0 12px 24px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    
+    /* 호버 시 이미지 효과 */
+    img {
+      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 
+        0 16px 40px rgba(0, 0, 0, 0.4),
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 490px) {
+      transform: none;
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+      
+      img {
+        transform: none;
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  /* 멤버별 고유한 색상 테마 - 더 부드럽게 */
+  &.member-minchan {
+    background: linear-gradient(135deg, ${MEMBERS.minchan.color.primary} 0%, ${MEMBERS.minchan.color.secondary} 100%);
+  }
+  
+  &.member-rokwon {
+    background: linear-gradient(135deg, ${MEMBERS.rokwon.color.primary} 0%, ${MEMBERS.rokwon.color.secondary} 100%);
+  }
+  
+  &.member-taejin {
+    background: linear-gradient(135deg, ${MEMBERS.taejin.color.primary} 0%, ${MEMBERS.taejin.color.secondary} 100%);
+  }
+  
+  &.member-doyeon {
+    background: linear-gradient(135deg, ${MEMBERS.doyeon.color.primary} 0%, ${MEMBERS.doyeon.color.secondary} 100%);
+  }
+
+  @media (max-width: 490px) {
+    max-width: 160px;
+    height: 240px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  @media (max-width: 490px) {
+    max-width: 160px;
+    height: 240px;
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+    
+    /* 모바일에서 모든 멤버별 색상 테마 강제 제거 */
+    &.member-minchan,
+    &.member-rokwon,
+    &.member-taejin,
+    &.member-doyeon {
+      background: transparent !important;
+    }
   }
 `
+
+
+
 const PostitWrapper = styled.div`
   position: relative;
   width: 100%;
-  max-width: 200px;
-  height: 330px;
-
-  @media (max-width: 490px) {
-    max-width: 140px;
-    height: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  
+  /* 글래스모피즘 내부 효과 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    pointer-events: none;
+    border-radius: 20px;
   }
 
-  /* 스티커 그림자 효과 */
-  filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.15));
-  
-  /* 미묘한 떨림 효과 */
-  animation: subtleFloat 3s ease-in-out infinite;
-  
-  @keyframes subtleFloat {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-3px);
+  @media (max-width: 490px) {
+    padding: 0;
+    
+    &::before {
+      display: none;
     }
   }
 `
-const Postit = styled.img`
-  max-width: 200px;
-  height: 330px;
+
+const Postit = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: 20px;
+  pointer-events: none;
 
   @media (max-width: 490px) {
-    max-width: 140px;
-    height: 250px;
+    display: none;
   }
+`
 
-  /* 스티커 자연스러운 회전 */
-  transform: rotate(-1deg);
-  transition: transform 0.3s ease;
+const MemberIcon = styled.div`
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
   
   &:hover {
-    transform: rotate(0deg);
+    transform: scale(1.2) rotate(5deg);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
   }
-`
 
-const OverlayImage = styled.img`
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 75%;
-  max-width: 300px;
-  pointer-events: none;
-  border-radius: 5px;
-`
-
-const MemberName = styled.div`
-  position: absolute;
-  bottom: 37px;
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
-  font-size: 23px;
-  color: #2d261a;
-
-  @media (max-width: 490px) {
-    font-size: 20px;
-    bottom: 31px;
+  .member-card:hover & {
+    transform: scale(1.2) rotate(5deg);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
   }
-`
-
-const MemberRole = styled.div`
-  position: absolute;
-  bottom: 13px;
-  width: 100%;
-  text-align: center;
-  color: #868282;
-  font-weight: 500;
-  font-size: 18px;
-
-  @media (max-width: 490px) {
-    font-size: 14px;
-    bottom: 12px;
-  }
-`
-
-const PlayingEmoji = styled.div`
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 70px;
-  pointer-events: none;
-  z-index: 1;
 
   @media (max-width: 490px) {
     font-size: 40px;
+    bottom: 0px;
+    right: 0px;
+  }
+`
+
+const OverlayImage = styled.div`
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+  z-index: 2;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 
+      0 12px 30px rgba(0, 0, 0, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+
+  }
+
+
+  @media (max-width: 490px) {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+    
+    /* 모바일에서 멤버별 색상 테마를 프로필 이미지에 적용 */
+    &.member-minchan img {
+      background: linear-gradient(135deg, ${MEMBERS.minchan.color.mobile.primary} 0%, ${MEMBERS.minchan.color.mobile.secondary} 100%);
+    }
+    
+    &.member-rokwon img {
+      background: linear-gradient(135deg, ${MEMBERS.rokwon.color.mobile.primary} 0%, ${MEMBERS.rokwon.color.mobile.secondary} 100%);
+    }
+    
+    &.member-taejin img {
+      background: linear-gradient(135deg, ${MEMBERS.taejin.color.mobile.primary} 0%, ${MEMBERS.taejin.color.mobile.secondary} 100%);
+    }
+    
+    &.member-doyeon img {
+      background: linear-gradient(135deg, ${MEMBERS.doyeon.color.mobile.primary} 0%, ${MEMBERS.doyeon.color.mobile.secondary} 100%);
+    }
+  }
+`
+
+const MemberName = styled.div`
+  position: relative;
+  text-align: center;
+  font-weight: 700;
+  font-size: 24px;
+  color: white;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+
+  @media (max-width: 490px) {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+`
+
+
+
+const MemberStats = styled.div`
+  position: relative;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+  margin-top: 6px;
+  justify-content: center;
+`
+
+const StatItem = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 490px) {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+`
+
+const StatValue = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+
+  @media (max-width: 490px) {
+    font-size: 12px;
+  }
+`
+
+const PlayingEmoji = styled.div`  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  animation: pulse 1.5s ease-in-out infinite;
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  @media (max-width: 490px) {
+    font-size: 50px;
   }
 `
 
@@ -507,3 +749,4 @@ const ProgressBar = styled.div`
   background-color: #2d261a;
   transition: width 0.2s ease;
 `
+

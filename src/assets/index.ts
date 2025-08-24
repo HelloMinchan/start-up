@@ -1,13 +1,26 @@
 // Assets 정보를 관리하는 중간 계층
 
-// 통합된 멤버 정보
+// 포스트잇 이미지
+export const POSTIT_IMAGES = {
+  postit: new URL('./postit.png', import.meta.url).href,
+} as const
+
+// 멤버 정보
 export const MEMBERS = {
   minchan: {
     name: '민찬',
-    role: '키보드 / 신디사이저',
+    role: '보컬',
     profile: new URL('./profile/minchan.png', import.meta.url).href,
     sound: new URL('./sound/minchan.m4a', import.meta.url).href,
     emoji: '🎹',
+    color: {
+      primary: 'rgba(240, 147, 251, 0.15)',
+      secondary: 'rgba(245, 87, 108, 0.15)',
+      mobile: {
+        primary: 'rgba(240, 147, 251, 0.2)',
+        secondary: 'rgba(245, 87, 108, 0.2)',
+      }
+    },
   },
   rokwon: {
     name: '록원',
@@ -15,6 +28,14 @@ export const MEMBERS = {
     profile: new URL('./profile/rokwon.png', import.meta.url).href,
     sound: new URL('./sound/rokwon.m4a', import.meta.url).href,
     emoji: '🎸',
+    color: {
+      primary: 'rgba(102, 126, 234, 0.15)',
+      secondary: 'rgba(118, 75, 162, 0.15)',
+      mobile: {
+        primary: 'rgba(102, 126, 234, 0.2)',
+        secondary: 'rgba(118, 75, 162, 0.2)',
+      }
+    },
   },
   taejin: {
     name: '태진',
@@ -22,13 +43,29 @@ export const MEMBERS = {
     profile: new URL('./profile/taejin.png', import.meta.url).href,
     sound: new URL('./sound/taejin.mp3', import.meta.url).href,
     emoji: '🎸',
+    color: {
+      primary: 'rgba(79, 172, 254, 0.15)',
+      secondary: 'rgba(0, 242, 254, 0.15)',
+      mobile: {
+        primary: 'rgba(79, 172, 254, 0.2)',
+        secondary: 'rgba(0, 242, 254, 0.2)',
+      }
+    },
   },
   doyeon: {
     name: '도연',
     role: '드럼',
     profile: new URL('./profile/doyeon.png', import.meta.url).href,
-    sound: null, // 도연은 아직 사운드가 없음
+    sound: null,
     emoji: '🥁',
+    color: {
+      primary: 'rgba(67, 233, 123, 0.15)',
+      secondary: 'rgba(56, 249, 215, 0.15)',
+      mobile: {
+        primary: 'rgba(67, 233, 123, 0.2)',
+        secondary: 'rgba(56, 249, 215, 0.2)',
+      }
+    },
   },
 } as const
 
@@ -69,11 +106,6 @@ export const TRACKS = {
 export const LOGO_IMAGES = {
   logo: new URL('./logo.png', import.meta.url).href,
   logoWhite: new URL('./logo-white.png', import.meta.url).href,
-} as const
-
-// 포스트잇 이미지
-export const POSTIT_IMAGES = {
-  postit: new URL('./postit.png', import.meta.url).href,
 } as const
 
 // 타입 정의
