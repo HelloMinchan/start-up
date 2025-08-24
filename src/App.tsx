@@ -314,7 +314,7 @@ const MemberSection = styled.div`
   width: 100%;
   margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
   justify-items: center;
 
@@ -328,20 +328,13 @@ const MemberSection = styled.div`
 
 const MemberContent = styled.div`
   width: 100%;
-  max-width: 220px;
+  max-width: 200px;
   height: 320px;
   cursor: pointer;
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.2),
-    0 8px 16px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: transparent;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   
   /* 스티커 붙이는 애니메이션 */
@@ -379,12 +372,6 @@ const MemberContent = styled.div`
   /* 호버 효과 */
   &:hover {
     transform: translateY(-8px) scale(1.02);
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 
-      0 30px 60px rgba(0, 0, 0, 0.3),
-      0 12px 24px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
     
     /* 호버 시 이미지 효과 */
     img {
@@ -410,22 +397,7 @@ const MemberContent = styled.div`
     }
   }
 
-  /* 멤버별 고유한 색상 테마 - 더 부드럽게 */
-  &.member-minchan {
-    background: linear-gradient(135deg, ${MEMBERS.minchan.color.primary} 0%, ${MEMBERS.minchan.color.secondary} 100%);
-  }
-  
-  &.member-rokwon {
-    background: linear-gradient(135deg, ${MEMBERS.rokwon.color.primary} 0%, ${MEMBERS.rokwon.color.secondary} 100%);
-  }
-  
-  &.member-taejin {
-    background: linear-gradient(135deg, ${MEMBERS.taejin.color.primary} 0%, ${MEMBERS.taejin.color.secondary} 100%);
-  }
-  
-  &.member-doyeon {
-    background: linear-gradient(135deg, ${MEMBERS.doyeon.color.primary} 0%, ${MEMBERS.doyeon.color.secondary} 100%);
-  }
+
 
   @media (max-width: 490px) {
     max-width: 160px;
@@ -470,26 +442,10 @@ const PostitWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 25px;
   box-sizing: border-box;
   
-  /* 글래스모피즘 내부 효과 */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.15) 0%,
-      rgba(255, 255, 255, 0.05) 50%,
-      rgba(255, 255, 255, 0.02) 100%
-    );
-    pointer-events: none;
-    border-radius: 20px;
-  }
+
 
   @media (max-width: 490px) {
     padding: 0;
@@ -506,7 +462,7 @@ const Postit = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: transparent;
   border-radius: 20px;
   pointer-events: none;
 
@@ -517,9 +473,9 @@ const Postit = styled.div`
 
 const MemberIcon = styled.div`
   position: absolute;
-  bottom: -5px;
-  right: -5px;
-  font-size: 48px;
+  bottom: -6px;
+  right: -6px;
+  font-size: 56px;
   color: rgba(255, 255, 255, 0.9);
   z-index: 3;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -546,9 +502,9 @@ const MemberIcon = styled.div`
 
 const OverlayImage = styled.div`
   position: relative;
-  width: 120px;
-  height: 120px;
-  margin-bottom: 20px;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 25px;
   z-index: 2;
 
   img {
@@ -562,10 +518,23 @@ const OverlayImage = styled.div`
       0 4px 8px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-
+  }
+  
+  /* 데스크탑에서도 멤버별 색상 테마를 프로필 이미지에 적용 */
+  &.member-minchan img {
+    background: linear-gradient(135deg, ${MEMBERS.minchan.color.primary} 0%, ${MEMBERS.minchan.color.secondary} 100%);
+  }
+  
+  &.member-rokwon img {
+    background: linear-gradient(135deg, ${MEMBERS.rokwon.color.primary} 0%, ${MEMBERS.rokwon.color.secondary} 100%);
+  }
+  
+  &.member-taejin img {
+    background: linear-gradient(135deg, ${MEMBERS.taejin.color.primary} 0%, ${MEMBERS.taejin.color.secondary} 100%);
+  }
+  
+  &.member-doyeon img {
+    background: linear-gradient(135deg, ${MEMBERS.doyeon.color.primary} 0%, ${MEMBERS.doyeon.color.secondary} 100%);
   }
 
 
@@ -597,9 +566,9 @@ const MemberName = styled.div`
   position: relative;
   text-align: center;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 28px;
   color: white;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   z-index: 2;
 
@@ -624,9 +593,9 @@ const StatItem = styled.div`
   display: flex;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.15);
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 16px;
   color: white;
   font-weight: 600;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);

@@ -9,7 +9,7 @@ export const POSTIT_IMAGES = {
 export const MEMBERS = {
   minchan: {
     name: '민찬',
-    role: '보컬',
+    role: '건반 / 신디사이저',
     profile: new URL('./profile/minchan.png', import.meta.url).href,
     sound: new URL('./sound/minchan.m4a', import.meta.url).href,
     emoji: '🎹',
