@@ -81,7 +81,9 @@ function App() {
 
   return (
     <Container>
-      <Background />
+      <Background 
+        currentMember={playingMember ? Object.keys(MEMBERS).find(key => MEMBERS[key as keyof typeof MEMBERS].name === playingMember) : null}
+      />
       <Layout>
         <Head>
           <Logo src={LOGO_IMAGES.logoWhite} />
@@ -442,7 +444,7 @@ const PostitWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 25px;
+  padding: 20px;
   box-sizing: border-box;
   
 
@@ -473,9 +475,9 @@ const Postit = styled.div`
 
 const MemberIcon = styled.div`
   position: absolute;
-  bottom: -6px;
-  right: -6px;
-  font-size: 56px;
+  bottom: -8px;
+  right: -8px;
+  font-size: 64px;
   color: rgba(255, 255, 255, 0.9);
   z-index: 3;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -502,9 +504,9 @@ const MemberIcon = styled.div`
 
 const OverlayImage = styled.div`
   position: relative;
-  width: 140px;
-  height: 140px;
-  margin-bottom: 25px;
+  width: 160px;
+  height: 160px;
+  margin-bottom: 20px;
   z-index: 2;
 
   img {
@@ -568,7 +570,7 @@ const MemberName = styled.div`
   font-weight: 700;
   font-size: 28px;
   color: white;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   z-index: 2;
 
@@ -585,7 +587,7 @@ const MemberStats = styled.div`
   display: flex;
   gap: 8px;
   z-index: 2;
-  margin-top: 6px;
+  margin-top: 4px;
   justify-content: center;
 `
 

@@ -1,7 +1,11 @@
 import { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 
-const Background = () => {
+interface BackgroundProps {
+  currentMember?: string | null
+}
+
+const Background = ({ currentMember }: BackgroundProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   // 배경 파장 애니메이션
@@ -19,6 +23,20 @@ const Background = () => {
     }
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
+
+    // 멤버별 색상 정의
+    const getMemberColor = (memberKey: string | null) => {
+      if (!memberKey) return { r: 255, g: 255, b: 255 } // 기본 흰색
+      
+              const memberColors = {
+          minchan : { r: 255, g: 89, b: 94 }, // 민찬: 빨간색 계열
+          rokwon : { r: 138, g: 43, b: 226 }, // 록원: 보라색 계열
+          taejin: { r: 0, g: 191, b: 255 },   // 태진: 하늘색 계열
+          doyeon: { r: 50, g: 205, b: 50 },   // 도연: 초록색 계열
+        }
+      
+      return memberColors[memberKey as keyof typeof memberColors] || { r: 255, g: 255, b: 255 }
+    }
 
     // 확장 애니메이션
     const waves: Array<{
@@ -41,7 +59,7 @@ const Background = () => {
         radius: 0,
         speed: baseSpeed + Math.random() * 0.3, // 속도 변동을 줄여서 더 정교하게
         opacity: 1,
-        thickness: Math.random() * 0.8 + 1.5, // 더욱 얇고 세련된 선
+        thickness: Math.random() * 0.8 + 2, // 더욱 얇고 세련된 선
         isActive: false,
         initialScale: 0.2, // 더욱 미묘한 시작 스케일
       })
@@ -116,10 +134,13 @@ const Background = () => {
             const scale = wave.radius < 80 ? 
               wave.initialScale + (wave.radius / 80) * (1 - wave.initialScale) : 1
             
+            // 멤버별 색상 적용
+            const memberColor = getMemberColor(currentMember || null)
+            
             // 메인 원 (더욱 미묘하고 세련되게)
             ctx.beginPath()
             ctx.arc(canvas.width / 2, canvas.height / 2, wave.radius, 0, Math.PI * 2)
-            ctx.strokeStyle = `rgba(255, 255, 255, ${wave.opacity * 0.25})` // 더욱 미묘한 투명도
+            ctx.strokeStyle = `rgba(${memberColor.r}, ${memberColor.g}, ${memberColor.b}, ${wave.opacity * 0.25})` // 멤버별 색상
             ctx.lineWidth = wave.thickness * scale
             ctx.stroke()
             
@@ -127,7 +148,7 @@ const Background = () => {
             if (wave.radius > 25) {
               ctx.beginPath()
               ctx.arc(canvas.width / 2, canvas.height / 2, wave.radius - 20, 0, Math.PI * 2)
-              ctx.strokeStyle = `rgba(255, 255, 255, ${wave.opacity * 0.12})` // 더욱 미묘한 투명도
+              ctx.strokeStyle = `rgba(${memberColor.r}, ${memberColor.g}, ${memberColor.b}, ${wave.opacity * 0.12})` // 멤버별 색상
               ctx.lineWidth = 1
               ctx.stroke()
             }
@@ -136,7 +157,7 @@ const Background = () => {
             if (wave.radius > 40) {
               ctx.beginPath()
               ctx.arc(canvas.width / 2, canvas.height / 2, wave.radius - 35, 0, Math.PI * 2)
-              ctx.strokeStyle = `rgba(255, 255, 255, ${wave.opacity * 0.06})` // 매우 미묘한 투명도
+              ctx.strokeStyle = `rgba(${memberColor.r}, ${memberColor.g}, ${memberColor.b}, ${wave.opacity * 0.06})` // 멤버별 색상
               ctx.lineWidth = 0.8
               ctx.stroke()
             }
@@ -153,7 +174,7 @@ const Background = () => {
     return () => {
       window.removeEventListener('resize', resizeCanvas)
     }
-  }, [])
+  }, [currentMember])
 
   return (
     <BackgroundContainer>
