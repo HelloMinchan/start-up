@@ -31,9 +31,9 @@ const Background = () => {
     }> = []
     
     const maxRadius = 400
-    const baseSpeed = 0.6 // 더욱 부드럽고 정교한 속도
+    const baseSpeed = 1.2 // 0.8에서 1.2로 더 빠르게
     let patternTimer = 0
-    const patternInterval = 6000 // 6초마다 패턴 반복 (더 여유로운 리듬)
+    const patternInterval = 3000 // 6초에서 4초로 줄여서 더 역동적으로
     
     // 초기 파장들 생성 (비활성 상태로)
     for (let i = 0; i < 3; i++) { // 3개 파동
@@ -41,7 +41,7 @@ const Background = () => {
         radius: 0,
         speed: baseSpeed + Math.random() * 0.3, // 속도 변동을 줄여서 더 정교하게
         opacity: 1,
-        thickness: Math.random() * 0.8 + 1.2, // 더욱 얇고 세련된 선
+        thickness: Math.random() * 0.8 + 1.5, // 더욱 얇고 세련된 선
         isActive: false,
         initialScale: 0.2, // 더욱 미묘한 시작 스케일
       })
@@ -81,7 +81,7 @@ const Background = () => {
             wave.isActive = true
             wave.radius = 0
             wave.opacity = 1
-          }, 1300) // 0.3초 지연
+          }, 1500) // 0.3초 지연
         }
       })
     }
@@ -94,7 +94,7 @@ const Background = () => {
       // 패턴 타이머 업데이트
       patternTimer += 16.67 // 약 60fps
       
-      // 5초마다 새로운 패턴 생성 (기존 패턴이 완전히 끝난 후)
+      // interval 마다 새로운 패턴 생성 (기존 패턴이 완전히 끝난 후)
       if (patternTimer >= patternInterval) {
         // 모든 파동이 비활성 상태인지 확인
         const allWavesInactive = waves.every(wave => !wave.isActive)
