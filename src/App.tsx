@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import Typewriter from 'typewriter-effect'
 import {
   LOGO_IMAGES,
-  POSTIT_IMAGES,
   MEMBERS,
   TRACKS,
 } from './assets'
@@ -23,9 +22,6 @@ function App() {
   const [playingMember, setPlayingMember] = useState<string | null>(null)
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null)
   const [progress, setProgress] = useState<number>(0)
-  
-  // 배경 파장 애니메이션을 위한 ref
-  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -171,62 +167,73 @@ function App() {
         </MemberSection>
 
         <SectionTitle>플레이리스트</SectionTitle>
-        {Object.entries(TRACKS).map(([trackKey, track]) => (
-          <TrackSection key={trackKey}>
-            <TrackTitle>#Track {trackKey.replace('track', '')}. {track.title}</TrackTitle>
-            <TrackDescription>{track.description}</TrackDescription>
-            <VideoWrapper>
-              <iframe
-                width="100%"
-                height="100%"
-                src={`https://www.youtube.com/embed/${track.youtubeId}`}
-                title={track.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </VideoWrapper>
-
-            <PracticeHistoryContainer>
-              <PracticeHistory>
-                <AccordionSummary expandIcon={<ExpandMoreIcon style={{ color: '#2d261a' }} />}>
-                  <div style={{ fontWeight: 'bold', color: '#2d261a' }}>연습 기록</div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  {track.practiceHistory ? (
-                    track.practiceHistory.map((practice, index) => (
-                      <div key={practice.week}>
-                        <PracticeHistoryListItem>
-                          <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                            <div style={{ color: '#2d261a' }}>{practice.week}주차 ({practice.date})</div>
-                            {playingMember === `${trackKey}Week${practice.week}` && (
-                              <ProgressBarContainer>
-                                <ProgressBar style={{ width: `${progress}%` }} />
-                              </ProgressBarContainer>
-                            )}
-                          </div>
-                          <div style={{ display: 'flex', color: '#2d261a' }} onClick={() => playSound(practice.sound, `${trackKey}Week${practice.week}`)}>
-                            {playingMember === `${trackKey}Week${practice.week}` ? (
-                              <PauseCircleFilledIcon style={{ fontSize: '30px' }} />
-                            ) : (
-                              <PlayCircleFilledWhiteIcon style={{ fontSize: '30px' }} />
-                            )}
-                          </div>
-                        </PracticeHistoryListItem>
-                        {index < track.practiceHistory.length - 1 && <PracticeHistoryListItemSeperator />}
-                      </div>
-                    ))
-                  ) : (
-                    <div style={{ color: '#2d261a' }}>연습을 기록할 경황이 없었던 시절..</div>
-                  )}
-                </AccordionDetails>
-              </PracticeHistory>
-            </PracticeHistoryContainer>
-          </TrackSection>
-        ))}
-
-        <TrackSection>
-          <TrackTitle>#Track ...</TrackTitle>
-        </TrackSection>
+        <TracksContainer>
+          {Object.entries(TRACKS).map(([trackKey, track], index) => (
+            <TrackRow key={trackKey} isEven={index % 2 === 1}>
+              <TrackCardHeader isEven={index % 2 === 1}>
+                <TrackHeaderContent isEven={index % 2 === 1}>
+                  <TrackHeaderTop>
+                    <TrackNumber>#{trackKey.replace('track', '')}</TrackNumber>
+                    <TrackTitle>{track.title}</TrackTitle>
+                  </TrackHeaderTop>
+                  <TrackDescription>{track.description}</TrackDescription>
+                </TrackHeaderContent>
+              </TrackCardHeader>
+              
+              <TrackContent isEven={index % 2 === 1}>
+                <VideoSection>
+                  <VideoWrapper>
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${track.youtubeId}`}
+                      title={track.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </VideoWrapper>
+                </VideoSection>
+                
+                <PracticeSection>
+                  <PracticeHistoryContainer>
+                    <PracticeHistoryTitle>연습 기록</PracticeHistoryTitle>
+                    
+                    <PracticeHistoryList>
+                      {track.practiceHistory ? (
+                        track.practiceHistory.map((practice, practiceIndex) => (
+                          <PracticeHistoryItem key={practice.week}>
+                            <PracticeInfo>
+                              <PracticeWeek>{practice.week}주차</PracticeWeek>
+                              <PracticeDate>({practice.date})</PracticeDate>
+                              {playingMember === `${trackKey}Week${practice.week}` && (
+                                <ProgressBarContainer>
+                                  <ProgressBar style={{ width: `${progress}%` }} />
+                                </ProgressBarContainer>
+                              )}
+                            </PracticeInfo>
+                            <PlayButton onClick={() => playSound(practice.sound, `${trackKey}Week${practice.week}`)}>
+                              {playingMember === `${trackKey}Week${practice.week}` ? (
+                                <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
+                              ) : (
+                                <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
+                              )}
+                            </PlayButton>
+                          </PracticeHistoryItem>
+                        ))
+                      ) : (
+                        <NoPracticeRecord>연습을 기록할 경황이 없었던 시절..</NoPracticeRecord>
+                      )}
+                    </PracticeHistoryList>
+                  </PracticeHistoryContainer>
+                </PracticeSection>
+              </TrackContent>
+            </TrackRow>
+          ))}
+        </TracksContainer>
+        
+        <CopyrightSection>
+          <CopyrightText>© 2025 start-up.band</CopyrightText>
+        </CopyrightSection>
       </Layout>
     </Container>
   )
@@ -287,7 +294,7 @@ const Description = styled.div`
 
 const SectionTitle = styled.div`
   width: 100%;
-  margin-top: 70px;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -504,8 +511,8 @@ const MemberIcon = styled.div`
 
 const OverlayImage = styled.div`
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   margin-bottom: 20px;
   z-index: 2;
 
@@ -541,8 +548,8 @@ const OverlayImage = styled.div`
 
 
   @media (max-width: 490px) {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     margin-bottom: 20px;
     
     /* 모바일에서 멤버별 색상 테마를 프로필 이미지에 적용 */
@@ -649,65 +656,285 @@ const PlayingEmoji = styled.div`  position: absolute;
   }
 `
 
-const TrackSection = styled.div`
+const TracksContainer = styled.div`
   width: 100%;
-  margin-top: 70px;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr; /* 기본적으로 한 행에 하나씩 */
+  gap: 30px;
+  justify-items: center;
+
+  @media (max-width: 490px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 30px;
+  }
+`
+
+const TrackRow = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 60px;
+  padding: 0;
+
+  @media (max-width: 490px) {
+    margin-bottom: 40px;
+  }
+`
+
+const TrackCard = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(0) scale(1);
+  z-index: 1;
+  
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.3),
+      0 12px 24px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 490px) {
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 16px;
+    transform: none !important;
+    z-index: 1;
+    
+    &:hover {
+      transform: none !important;
+    }
+  }
+`
+
+const TrackCardHeader = styled.div<{ isEven: boolean }>`
+  width: 100%;
+  text-align: center;
+  padding-bottom: 15px;
+  margin-bottom: 0;
+  
+  /* 짝수 트랙의 경우 텍스트 정렬을 오른쪽으로 */
+  text-align: ${props => props.isEven ? 'right' : 'left'};
+`
+
+const TrackHeaderContent = styled.div<{ isEven: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: ${props => props.isEven ? 'flex-end' : 'flex-start'};
+  gap: 8px;
+  margin-bottom: 0;
+`
+
+const TrackHeaderTop = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`
+
+const TrackNumber = styled.div`
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  letter-spacing: 1px;
+  
+  @media (max-width: 490px) {
+    font-size: 14px;
+  }
+`
+
+const TrackTitle = styled.div`
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+  
+  @media (max-width: 490px) {
+    font-size: 18px;
+  }
+`
+
+const TrackDescription = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: inherit;
+`
+
+const PracticeHistoryTitle = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  text-align: center;
+  
+  /* 데스크탑에서는 숨김 */
+  @media (min-width: 491px) {
+    display: none;
+  }
+  
+  @media (max-width: 490px) {
+    font-size: 16px;
+  }
+`
+
+const PracticeHistoryList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 8px;
+`
+
+const PracticeHistoryItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  overflow: visible;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(4px);
+  }
+`
+
+const PracticeInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 4px;
+`
+
+const PracticeWeek = styled.div`
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  
+  @media (max-width: 490px) {
+    font-size: 14px;
+  }
+`
+
+const PracticeDate = styled.div`
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  
+  @media (max-width: 490px) {
+    font-size: 12px;
+  }
+`
+
+const PlayButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(102, 126, 234, 0.3);
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 490px) {
+    width: 40px;
+    height: 40px;
+  }
+`
+
+const NoPracticeRecord = styled.div`
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  padding: 20px;
+`
+
+const VideoWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+`
+
+const VideoSection = styled.div`
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+`
+
+const PracticeSection = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
-const TrackTitle = styled.div`
-  font-size: 20px;
-  font-weight: 500;
-  /* color: #2d261a; */
-  color: white;
-  margin-bottom: 5px;
-`
-
-const TrackDescription = styled.div`
-  font-size: 18px;
-  font-weight: 500;
-  /* color: #868282; */
-  color: white;
-  margin-bottom: 20px;
-`
-
-const VideoWrapper = styled.div`
+const TrackContent = styled.div<{ isEven: boolean }>`
   width: 100%;
-  max-width: 800px;
-  aspect-ratio: 16/9;
-  margin-bottom: 70px;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 15px;
+  
+  /* 짝수 트랙의 경우 순서를 바꿈 */
+  flex-direction: ${props => props.isEven ? 'row-reverse' : 'row'};
+
+  & > div {
+    flex: 1;
+  }
 
   @media (max-width: 490px) {
-    margin-bottom: 15px;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
   }
 `
 
 const PracticeHistoryContainer = styled.div`
   width: 100%;
-  max-width: 800px;
-  margin-top: -40px;
-
-  @media (max-width: 490px) {
-    margin-top: 0px;
-  }
+  margin-top: 0px;
+  overflow: visible;
 `
 
-const PracticeHistory = styled(Accordion)`
-  background-color: #f1f1ef;
-  border-radius: 0px;
-`
-const PracticeHistoryListItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-const PracticeHistoryListItemSeperator = styled.div`
-  height: 13px;
-`
 const ProgressBarContainer = styled.div`
   width: calc(100% - 10px);
-
   height: 6px;
   background-color: #ccc;
   border-radius: 4px;
@@ -721,3 +948,20 @@ const ProgressBar = styled.div`
   transition: width 0.2s ease;
 `
 
+const CopyrightSection = styled.div`
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+`
+
+const CopyrightText = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.5px;
+`

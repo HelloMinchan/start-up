@@ -27,7 +27,7 @@ export const MEMBERS = {
     role: '기타',
     profile: new URL('./profile/rokwon.png', import.meta.url).href,
     sound: new URL('./sound/rokwon.m4a', import.meta.url).href,
-    emoji: '🎸',
+    emoji: '⚡️',
     color: {
       primary: 'rgba(102, 126, 234, 0.15)',
       secondary: 'rgba(118, 75, 162, 0.15)',
@@ -73,14 +73,14 @@ export const MEMBERS = {
 export const TRACKS = {
   track1: {
     title: 'Falling Slowly',
-    description: '✅ 완곡, 25.01.12 ~ 25.06.29',
+    description: '25.01.12 ~ 25.06.29',
     youtubeId: 'SxE8f80DFpM',
     status: 'completed',
     practiceHistory: null,
   },
   track2: {
     title: '예뻤어',
-    description: '✅ 완곡, 25.07.02 ~ 25.07.30',
+    description: '25.07.02 ~ 25.07.30',
     youtubeId: 'xejMrLT0Q7M?si=2kZJLgnLTTk3l8ag',
     status: 'completed',
     practiceHistory: [
@@ -88,11 +88,14 @@ export const TRACKS = {
       { week: 3, date: '25.07.16', sound: new URL('./sound/track2/week3.m4a', import.meta.url).href },
       { week: 4, date: '25.07.23', sound: new URL('./sound/track2/week4.m4a', import.meta.url).href },
       { week: 5, date: '25.07.30', sound: new URL('./sound/track2/week5.m4a', import.meta.url).href },
+      // { week: 6, date: '25.08.01', sound: new URL('./sound/track2/week5.m4a', import.meta.url).href },
+      // { week: 7, date: '25.08.10', sound: new URL('./sound/track2/week5.m4a', import.meta.url).href },
+      // { week: 8, date: '25.08.17', sound: new URL('./sound/track2/week5.m4a', import.meta.url).href },
     ],
   },
   track3: {
     title: '박하사탕',
-    description: '🔥 연습, 25.08.07 ~',
+    description: '🔥 25.08.07 ~',
     youtubeId: 'fDQzDsAW434?si=plBauuN_dba4V8E1',
     status: 'practicing',
     practiceHistory: [

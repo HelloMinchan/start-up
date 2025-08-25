@@ -28,7 +28,7 @@ const Background = ({ currentMember }: BackgroundProps) => {
     const getMemberColor = (memberKey: string | null) => {
       if (!memberKey) return { r: 255, g: 255, b: 255 } // 기본 흰색
       
-              const memberColors = {
+        const memberColors = {
           minchan : { r: 255, g: 89, b: 94 }, // 민찬: 빨간색 계열
           rokwon : { r: 138, g: 43, b: 226 }, // 록원: 보라색 계열
           taejin: { r: 0, g: 191, b: 255 },   // 태진: 하늘색 계열
@@ -123,7 +123,7 @@ const Background = ({ currentMember }: BackgroundProps) => {
       }
       
       // 모든 파장 업데이트 및 그리기
-      waves.forEach((wave, index) => {
+      waves.forEach((wave, _) => {
         if (wave.isActive) {
           wave.radius += wave.speed
           // 파동이 퍼질수록 희미해지도록 투명도 조정 (더욱 부드럽게)
