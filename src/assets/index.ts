@@ -61,8 +61,9 @@ export const TRACKS = {
     practiceHistory: [
       { week: 1, date: '25.08.07', sound: new URL('./sound/track3/week1.m4a', import.meta.url).href },
       { week: 2, date: '25.08.20', sound: new URL('./sound/track3/week2.m4a', import.meta.url).href },
+      { week: 3, date: '25.08.28', sound: new URL('./sound/track3/week3.m4a', import.meta.url).href },
     ],
-  }
+  },
 } as const
 
 // 로고 이미지
