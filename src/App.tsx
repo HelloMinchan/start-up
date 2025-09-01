@@ -22,6 +22,7 @@ function App() {
   const [playingMember, setPlayingMember] = useState<string | null>(null)
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null)
   const [progress, setProgress] = useState<number>(0)
+  const [activeSection, setActiveSection] = useState<string>('head')
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -41,6 +42,29 @@ function App() {
       clearTimeout(timer2)
       clearTimeout(timer3)
     }
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['head', 'members', 'tracks']
+      const scrollPosition = window.scrollY + window.innerHeight / 2
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.querySelector(`[data-section="${sections[i]}"]`)
+        if (section) {
+          const rect = section.getBoundingClientRect()
+          const sectionTop = rect.top + window.scrollY
+          
+          if (scrollPosition >= sectionTop) {
+            setActiveSection(sections[i])
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const playSound = (audioFile: string, memberName: string) => {
@@ -75,59 +99,124 @@ function App() {
     setPlayingMember(memberName)
   }
 
+
+
   return (
     <Container>
       <Background 
         currentMember={playingMember ? Object.keys(MEMBERS).find(key => MEMBERS[key as keyof typeof MEMBERS].name === playingMember) : null}
       />
       <Layout>
-        <Head>
-          <Logo src={LOGO_IMAGES.logoWhite} />
+        <TOCSidebar>
+          <TOCItem 
+            onClick={() => {
+              const headSection = document.querySelector('[data-section="head"]');
+              headSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            isActive={activeSection === 'head'}
+          >
+            <TOCIcon>🎸</TOCIcon>
+            <TOCLabel>START-UP</TOCLabel>
+          </TOCItem>
+          <TOCItem 
+            onClick={() => {
+              const memberTitle = document.querySelector('[data-section="members"]');
+              memberTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            isActive={activeSection === 'members'}
+          >
+            <TOCIcon>👥</TOCIcon>
+            <TOCLabel>Members</TOCLabel>
+          </TOCItem>
+          <TOCItem 
+            onClick={() => {
+              const tracksTitle = document.querySelector('[data-section="tracks"]');
+              tracksTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            isActive={activeSection === 'tracks'}
+          >
+            <TOCIcon>🎵</TOCIcon>
+            <TOCLabel>Tracks</TOCLabel>
+          </TOCItem>
+        </TOCSidebar>
+        
+        <Head data-section="head">
+          <HeadContent>
+            <HeadTitle>
+              <HeadLogo src={LOGO_IMAGES.logo} alt="START-UP" />
+            </HeadTitle>
+            <HeadDescription>
+              <Typewriter
+                options={{
+                  strings: '안녕하세요 :D',
+                  autoStart: true,
+                }}
+              />
+
+              {isVisible ? (
+                <Typewriter
+                  options={{
+                    strings: '꿈과 현실 사이 치열하게 고민하고',
+                    autoStart: true,
+                  }}
+                />
+              ) : (
+                <div style={{ visibility: 'hidden' }}>-</div>
+              )}
+
+              {isVisible2 ? (
+                <Typewriter
+                  options={{
+                    strings: '음악으로 뜨겁게 열정을 불태우는',
+                    autoStart: true,
+                  }}
+                />
+              ) : (
+                <div style={{ visibility: 'hidden' }}>-</div>
+              )}
+
+              {isVisible3 ? (
+                <Typewriter
+                  options={{
+                    strings: '직장인 밴드 START-UP입니다!',
+                    autoStart: true,
+                  }}
+                />
+              ) : (
+                <div style={{ visibility: 'hidden' }}>-</div>
+              )}
+            </HeadDescription>
+            
+            <HeadStats>
+              <HeadStatItem 
+                onClick={() => {
+                  const memberTitle = document.querySelector('[data-section="members"]');
+                  memberTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <HeadStatNumber>{Object.keys(MEMBERS).length}</HeadStatNumber>
+                <HeadStatLabel>Members</HeadStatLabel>
+              </HeadStatItem>
+              <HeadStatItem 
+                onClick={() => {
+                  const tracksTitle = document.querySelector('[data-section="tracks"]');
+                  tracksTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <HeadStatNumber>{Object.keys(TRACKS).length}</HeadStatNumber>
+                <HeadStatLabel>Tracks</HeadStatLabel>
+              </HeadStatItem>
+              <HeadStatItem>
+                <HeadStatNumber>∞</HeadStatNumber>
+                <HeadStatLabel>Passion</HeadStatLabel>
+              </HeadStatItem>
+            </HeadStats>
+          </HeadContent>
         </Head>
 
-        <Description>
-          <Typewriter
-            options={{
-              strings: '안녕하세요 :D',
-              autoStart: true,
-            }}
-          />
-
-          {isVisible ? (
-            <Typewriter
-              options={{
-                strings: '꿈과 현실 사이 치열하게 고민하고',
-                autoStart: true,
-              }}
-            />
-          ) : (
-            <div style={{ visibility: 'hidden' }}>-</div>
-          )}
-
-          {isVisible2 ? (
-            <Typewriter
-              options={{
-                strings: '음악으로 뜨겁게 열정을 불태우는',
-                autoStart: true,
-              }}
-            />
-          ) : (
-            <div style={{ visibility: 'hidden' }}>-</div>
-          )}
-
-          {isVisible3 ? (
-            <Typewriter
-              options={{
-                strings: '직장인 밴드 START-UP입니다!',
-                autoStart: true,
-              }}
-            />
-          ) : (
-            <div style={{ visibility: 'hidden' }}>-</div>
-          )}
-        </Description>
-
-        <SectionTitle>멤버</SectionTitle>
+        <SectionTitle data-section="members">Members</SectionTitle>
         <MemberSection>
           {Object.entries(MEMBERS).map(([key, member], index) => (
             <MemberContent 
@@ -166,10 +255,11 @@ function App() {
           ))}
         </MemberSection>
 
-        <SectionTitle>플레이리스트</SectionTitle>
+        <SectionTitle data-section="tracks">Tracks</SectionTitle>
         <TracksContainer>
           {Object.entries(TRACKS).map(([trackKey, track], index) => (
             <TrackRow key={trackKey} isEven={index % 2 === 1}>
+              <div data-track={trackKey} style={{ display: 'contents' }}>
               <TrackCardHeader isEven={index % 2 === 1}>
                 <TrackHeaderContent isEven={index % 2 === 1}>
                   <TrackHeaderTop>
@@ -227,9 +317,12 @@ function App() {
                   </PracticeHistoryContainer>
                 </PracticeSection>
               </TrackContent>
+              </div>
             </TrackRow>
           ))}
         </TracksContainer>
+        
+
         
         <CopyrightSection>
           <CopyrightText>© 2025 start-up.band</CopyrightText>
@@ -251,6 +344,65 @@ const Container = styled.div`
   align-items: center;
   position: relative;
 `
+
+const TOCSidebar = styled.div`
+  position: fixed;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+  
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`
+
+const TOCItem = styled.div<{ isActive?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: ${props => props.isActive ? '1' : '0.6'};
+  position: relative;
+  
+  &:hover {
+    transform: translateX(8px);
+    opacity: 1;
+    
+    &::after {
+      width: 100%;
+    }
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+`
+
+const TOCIcon = styled.span`
+  font-size: 20px;
+  opacity: 0.9;
+`
+
+const TOCLabel = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.5px;
+`
 const Layout = styled.div`
   width: 100%;
   max-width: 1080px;
@@ -261,12 +413,152 @@ const Layout = styled.div`
 
 const Head = styled.div`
   margin-top: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
 
   @media (max-width: 490px) {
     margin-top: 50px;
+  }
+`
+
+const HeadContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+
+  @media (max-width: 490px) {
+    padding: 30px 0;
+  }
+`
+
+const HeadLeft = styled.div`
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const HeadRight = styled.div`
+  flex: 1;
+  max-width: 400px;
+  text-align: center;
+  color: white;
+
+  @media (max-width: 490px) {
+    max-width: 100%;
+  }
+`
+
+const HeadTitle = styled.h1`
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 490px) {
+    margin-bottom: 40px;
+  }
+`
+
+const HeadLogo = styled.img`
+  height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+
+  @media (max-width: 490px) {
+    height: 110px;
+  }
+`
+
+const HeadDescription = styled.div`
+  font-size: 22px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 50px;
+  font-weight: 500;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  @media (max-width: 490px) {
+    font-size: 20px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+`
+
+const HeadStats = styled.div`
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: nowrap;
+
+  @media (max-width: 490px) {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+`
+
+const HeadStatItem = styled.div`
+  text-align: center;
+  padding: 20px 25px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  min-width: 100px;
+  flex: 1;
+  max-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 490px) {
+    padding: 18px 20px;
+    min-width: 90px;
+    max-width: none;
+  }
+`
+
+const HeadStatNumber = styled.div`
+  font-size: 32px;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  line-height: 1;
+
+  @media (max-width: 490px) {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+`
+
+const HeadStatLabel = styled.div`
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  line-height: 1.2;
+
+  @media (max-width: 490px) {
+    font-size: 13px;
+    letter-spacing: 1px;
   }
 `
 const Logo = styled.img`
@@ -294,7 +586,7 @@ const Description = styled.div`
 
 const SectionTitle = styled.div`
   width: 100%;
-  margin-top: 100px;
+  margin-top: 130px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -671,7 +963,7 @@ const TracksContainer = styled.div`
   }
 `
 
-const TrackRow = styled.div`
+const TrackRow = styled.div<{ isEven: boolean }>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -959,9 +1251,10 @@ const CopyrightSection = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 `
 
-const CopyrightText = styled.div`
-  font-size: 14px;
+const CopyrightText = styled.div`  font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.5px;
 `
+
+
