@@ -19,7 +19,7 @@ export const MEMBERS = {
       mobile: {
         primary: 'rgba(240, 147, 251, 0.2)',
         secondary: 'rgba(245, 87, 108, 0.2)',
-      }
+      },
     },
   },
   rokwon: {
@@ -34,7 +34,7 @@ export const MEMBERS = {
       mobile: {
         primary: 'rgba(102, 126, 234, 0.2)',
         secondary: 'rgba(118, 75, 162, 0.2)',
-      }
+      },
     },
   },
   taejin: {
@@ -49,7 +49,7 @@ export const MEMBERS = {
       mobile: {
         primary: 'rgba(79, 172, 254, 0.2)',
         secondary: 'rgba(0, 242, 254, 0.2)',
-      }
+      },
     },
   },
   doyeon: {
@@ -64,7 +64,7 @@ export const MEMBERS = {
       mobile: {
         primary: 'rgba(67, 233, 123, 0.2)',
         secondary: 'rgba(56, 249, 215, 0.2)',
-      }
+      },
     },
   },
 } as const
@@ -95,14 +95,22 @@ export const TRACKS = {
   },
   track3: {
     title: '박하사탕',
-    description: '🔥 25.08.07 ~',
+    description: '25.08.07 ~ 25.09.04',
     youtubeId: 'fDQzDsAW434?si=plBauuN_dba4V8E1',
-    status: 'practicing',
+    status: 'completed',
     practiceHistory: [
       { week: 1, date: '25.08.07', sound: new URL('./sound/track3/week1.m4a', import.meta.url).href },
       { week: 2, date: '25.08.20', sound: new URL('./sound/track3/week2.m4a', import.meta.url).href },
       { week: 3, date: '25.08.28', sound: new URL('./sound/track3/week3.m4a', import.meta.url).href },
+      { week: 4, date: '25.09.04', sound: new URL('./sound/track3/week4.m4a', import.meta.url).href },
     ],
+  },
+  track4: {
+    title: '밤이 깊었네 (Drama Ver.)',
+    description: '25.09.16 ~ 🔥',
+    youtubeId: 'Y39aDxwpt6o?si=ZibT-v9SfpyLKpQ6',
+    status: 'practicing',
+    practiceHistory: [],
   },
 } as const
 
