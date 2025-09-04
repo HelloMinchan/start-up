@@ -1186,7 +1186,7 @@ const VideoSection = styled.div`
   width: 100%;
   aspect-ratio: 16/9;
   border-radius: 12px;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 `
 
