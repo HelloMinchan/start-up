@@ -1,11 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import Typewriter from 'typewriter-effect'
-import {
-  LOGO_IMAGES,
-  MEMBERS,
-  TRACKS,
-} from './assets'
+import { LOGO_IMAGES, MEMBERS, TRACKS } from './assets'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -54,7 +50,7 @@ function App() {
         if (section) {
           const rect = section.getBoundingClientRect()
           const sectionTop = rect.top + window.scrollY
-          
+
           if (scrollPosition >= sectionTop) {
             setActiveSection(sections[i])
             break
@@ -99,39 +95,37 @@ function App() {
     setPlayingMember(memberName)
   }
 
-
-
   return (
     <Container>
-      <Background 
-        currentMember={playingMember ? Object.keys(MEMBERS).find(key => MEMBERS[key as keyof typeof MEMBERS].name === playingMember) : null}
+      <Background
+        currentMember={playingMember ? Object.keys(MEMBERS).find((key) => MEMBERS[key as keyof typeof MEMBERS].name === playingMember) : null}
       />
       <Layout>
         <TOCSidebar>
-          <TOCItem 
+          <TOCItem
             onClick={() => {
-              const headSection = document.querySelector('[data-section="head"]');
-              headSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              const headSection = document.querySelector('[data-section="head"]')
+              headSection?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             }}
             isActive={activeSection === 'head'}
           >
             <TOCIcon>🎸</TOCIcon>
             <TOCLabel>START-UP</TOCLabel>
           </TOCItem>
-          <TOCItem 
+          <TOCItem
             onClick={() => {
-              const memberTitle = document.querySelector('[data-section="members"]');
-              memberTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              const memberTitle = document.querySelector('[data-section="members"]')
+              memberTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             }}
             isActive={activeSection === 'members'}
           >
             <TOCIcon>👥</TOCIcon>
             <TOCLabel>Members</TOCLabel>
           </TOCItem>
-          <TOCItem 
+          <TOCItem
             onClick={() => {
-              const tracksTitle = document.querySelector('[data-section="tracks"]');
-              tracksTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              const tracksTitle = document.querySelector('[data-section="tracks"]')
+              tracksTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             }}
             isActive={activeSection === 'tracks'}
           >
@@ -139,7 +133,7 @@ function App() {
             <TOCLabel>Tracks</TOCLabel>
           </TOCItem>
         </TOCSidebar>
-        
+
         <Head data-section="head">
           <HeadContent>
             <HeadTitle>
@@ -186,22 +180,22 @@ function App() {
                 <div style={{ visibility: 'hidden' }}>-</div>
               )}
             </HeadDescription>
-            
+
             <HeadStats>
-              <HeadStatItem 
+              <HeadStatItem
                 onClick={() => {
-                  const memberTitle = document.querySelector('[data-section="members"]');
-                  memberTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  const memberTitle = document.querySelector('[data-section="members"]')
+                  memberTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 }}
                 style={{ cursor: 'pointer' }}
               >
                 <HeadStatNumber>{Object.keys(MEMBERS).length}</HeadStatNumber>
                 <HeadStatLabel>Members</HeadStatLabel>
               </HeadStatItem>
-              <HeadStatItem 
+              <HeadStatItem
                 onClick={() => {
-                  const tracksTitle = document.querySelector('[data-section="tracks"]');
-                  tracksTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  const tracksTitle = document.querySelector('[data-section="tracks"]')
+                  tracksTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 }}
                 style={{ cursor: 'pointer' }}
               >
@@ -219,7 +213,7 @@ function App() {
         <SectionTitle data-section="members">Members</SectionTitle>
         <MemberSection>
           {Object.entries(MEMBERS).map(([key, member], index) => (
-            <MemberContent 
+            <MemberContent
               key={key}
               data-member={key}
               className={`member-card member-${key}`}
@@ -232,15 +226,8 @@ function App() {
             >
               <PostitWrapper>
                 <Postit />
-                <OverlayImage 
-                  data-member={key}
-                  className={`member-${key}`}
-                  style={{ opacity: playingMember === member.name ? 0.3 : 1 }} 
-                >
-                  <img 
-                    src={member.profile} 
-                    alt={member.name}
-                  />
+                <OverlayImage data-member={key} className={`member-${key}`} style={{ opacity: playingMember === member.name ? 0.3 : 1 }}>
+                  <img src={member.profile} alt={member.name} />
                   <MemberIcon>{member.emoji}</MemberIcon>
                 </OverlayImage>
                 {playingMember === member.name && <PlayingEmoji>{member.emoji}</PlayingEmoji>}
@@ -260,70 +247,68 @@ function App() {
           {Object.entries(TRACKS).map(([trackKey, track], index) => (
             <TrackRow key={trackKey} isEven={index % 2 === 1}>
               <div data-track={trackKey} style={{ display: 'contents' }}>
-              <TrackCardHeader isEven={index % 2 === 1}>
-                <TrackHeaderContent isEven={index % 2 === 1}>
-                  <TrackHeaderTop>
-                    <TrackNumber>#{trackKey.replace('track', '')}</TrackNumber>
-                    <TrackTitle>{track.title}</TrackTitle>
-                  </TrackHeaderTop>
-                  <TrackDescription>{track.description}</TrackDescription>
-                </TrackHeaderContent>
-              </TrackCardHeader>
-              
-              <TrackContent isEven={index % 2 === 1}>
-                <VideoSection>
-                  <VideoWrapper>
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={`https://www.youtube.com/embed/${track.youtubeId}`}
-                      title={track.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </VideoWrapper>
-                </VideoSection>
-                
-                <PracticeSection>
-                  <PracticeHistoryContainer>
-                    <PracticeHistoryTitle>연습 기록</PracticeHistoryTitle>
-                    
-                    <PracticeHistoryList>
-                      {track.practiceHistory ? (
-                        track.practiceHistory.map((practice, practiceIndex) => (
-                          <PracticeHistoryItem key={practice.week}>
-                            <PracticeInfo>
-                              <PracticeWeek>{practice.week}주차</PracticeWeek>
-                              <PracticeDate>({practice.date})</PracticeDate>
-                              {playingMember === `${trackKey}Week${practice.week}` && (
-                                <ProgressBarContainer>
-                                  <ProgressBar style={{ width: `${progress}%` }} />
-                                </ProgressBarContainer>
-                              )}
-                            </PracticeInfo>
-                            <PlayButton onClick={() => playSound(practice.sound, `${trackKey}Week${practice.week}`)}>
-                              {playingMember === `${trackKey}Week${practice.week}` ? (
-                                <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
-                              ) : (
-                                <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
-                              )}
-                            </PlayButton>
-                          </PracticeHistoryItem>
-                        ))
-                      ) : (
-                        <NoPracticeRecord>연습을 기록할 경황이 없었던 시절..</NoPracticeRecord>
-                      )}
-                    </PracticeHistoryList>
-                  </PracticeHistoryContainer>
-                </PracticeSection>
-              </TrackContent>
+                <TrackCardHeader isEven={index % 2 === 1}>
+                  <TrackHeaderContent isEven={index % 2 === 1}>
+                    <TrackHeaderTop>
+                      <TrackNumber>#{trackKey.replace('track', '')}</TrackNumber>
+                      <TrackTitle>{track.title}</TrackTitle>
+                    </TrackHeaderTop>
+                    <TrackDescription>{track.description}</TrackDescription>
+                  </TrackHeaderContent>
+                </TrackCardHeader>
+
+                <TrackContent isEven={index % 2 === 1}>
+                  <VideoSection>
+                    <VideoWrapper>
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={`https://www.youtube.com/embed/${track.youtubeId}`}
+                        title={track.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </VideoWrapper>
+                  </VideoSection>
+
+                  <PracticeSection>
+                    <PracticeHistoryContainer>
+                      <PracticeHistoryTitle>연습 기록</PracticeHistoryTitle>
+
+                      <PracticeHistoryList>
+                        {track.practiceHistory ? (
+                          track.practiceHistory.map((practice, practiceIndex) => (
+                            <PracticeHistoryItem key={practice.week}>
+                              <PracticeInfo>
+                                <PracticeWeek>{practice.week}주차</PracticeWeek>
+                                <PracticeDate>({practice.date})</PracticeDate>
+                                {playingMember === `${trackKey}Week${practice.week}` && (
+                                  <ProgressBarContainer>
+                                    <ProgressBar style={{ width: `${progress}%` }} />
+                                  </ProgressBarContainer>
+                                )}
+                              </PracticeInfo>
+                              <PlayButton onClick={() => playSound(practice.sound, `${trackKey}Week${practice.week}`)}>
+                                {playingMember === `${trackKey}Week${practice.week}` ? (
+                                  <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
+                                ) : (
+                                  <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
+                                )}
+                              </PlayButton>
+                            </PracticeHistoryItem>
+                          ))
+                        ) : (
+                          <NoPracticeRecord>연습을 기록할 경황이 없었던 시절..</NoPracticeRecord>
+                        )}
+                      </PracticeHistoryList>
+                    </PracticeHistoryContainer>
+                  </PracticeSection>
+                </TrackContent>
               </div>
             </TrackRow>
           ))}
         </TracksContainer>
-        
 
-        
         <CopyrightSection>
           <CopyrightText>© 2025 start-up.band</CopyrightText>
         </CopyrightSection>
@@ -354,7 +339,7 @@ const TOCSidebar = styled.div`
   flex-direction: column;
   gap: 8px;
   z-index: 1000;
-  
+
   @media (max-width: 1200px) {
     display: none;
   }
@@ -367,18 +352,18 @@ const TOCItem = styled.div<{ isActive?: boolean }>`
   padding: 12px 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  opacity: ${props => props.isActive ? '1' : '0.6'};
+  opacity: ${(props) => (props.isActive ? '1' : '0.6')};
   position: relative;
-  
+
   &:hover {
     transform: translateX(8px);
     opacity: 1;
-    
+
     &::after {
       width: 100%;
     }
   }
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -517,7 +502,7 @@ const HeadStatItem = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
   &:hover {
     transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.15);
@@ -595,7 +580,7 @@ const SectionTitle = styled.div`
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -637,7 +622,7 @@ const MemberContent = styled.div`
   overflow: hidden;
   background: transparent;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  
+
   /* 스티커 붙이는 애니메이션 */
   @keyframes stickerStickIn {
     0% {
@@ -673,15 +658,12 @@ const MemberContent = styled.div`
   /* 호버 효과 */
   &:hover {
     transform: translateY(-8px) scale(1.02);
-    
+
     /* 호버 시 이미지 효과 */
     img {
       transform: scale(1.05);
       border-color: rgba(255, 255, 255, 0.6);
-      box-shadow: 
-        0 16px 40px rgba(0, 0, 0, 0.4),
-        0 6px 12px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 6px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     @media (max-width: 490px) {
@@ -689,7 +671,7 @@ const MemberContent = styled.div`
       background: transparent;
       border-color: transparent;
       box-shadow: none;
-      
+
       img {
         transform: none;
         border-color: rgba(255, 255, 255, 0.4);
@@ -697,8 +679,6 @@ const MemberContent = styled.div`
       }
     }
   }
-
-
 
   @media (max-width: 490px) {
     max-width: 160px;
@@ -722,7 +702,7 @@ const MemberContent = styled.div`
     box-shadow: none;
     border-radius: 0;
     overflow: visible;
-    
+
     /* 모바일에서 모든 멤버별 색상 테마 강제 제거 */
     &.member-minchan,
     &.member-rokwon,
@@ -732,8 +712,6 @@ const MemberContent = styled.div`
     }
   }
 `
-
-
 
 const PostitWrapper = styled.div`
   position: relative;
@@ -745,12 +723,10 @@ const PostitWrapper = styled.div`
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
-  
-
 
   @media (max-width: 490px) {
     padding: 0;
-    
+
     &::before {
       display: none;
     }
@@ -781,7 +757,7 @@ const MemberIcon = styled.div`
   z-index: 3;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: scale(1.2) rotate(5deg);
     color: rgba(255, 255, 255, 1);
@@ -814,51 +790,63 @@ const OverlayImage = styled.div`
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 
-      0 12px 30px rgba(0, 0, 0, 0.3),
-      0 4px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
   }
-  
+
   /* 데스크탑에서도 멤버별 색상 테마를 프로필 이미지에 적용 */
   &.member-minchan img {
     background: linear-gradient(135deg, ${MEMBERS.minchan.color.primary} 0%, ${MEMBERS.minchan.color.secondary} 100%);
   }
-  
+
   &.member-rokwon img {
     background: linear-gradient(135deg, ${MEMBERS.rokwon.color.primary} 0%, ${MEMBERS.rokwon.color.secondary} 100%);
   }
-  
+
   &.member-taejin img {
     background: linear-gradient(135deg, ${MEMBERS.taejin.color.primary} 0%, ${MEMBERS.taejin.color.secondary} 100%);
   }
-  
+
   &.member-doyeon img {
     background: linear-gradient(135deg, ${MEMBERS.doyeon.color.primary} 0%, ${MEMBERS.doyeon.color.secondary} 100%);
   }
 
+  &.member-jihye img {
+    background: linear-gradient(135deg, ${MEMBERS.jihye.color.primary} 0%, ${MEMBERS.jihye.color.secondary} 100%);
+  }
+
+  &.member-jihyeok img {
+    background: linear-gradient(135deg, ${MEMBERS.jihyeok.color.primary} 0%, ${MEMBERS.jihyeok.color.secondary} 100%);
+  }
 
   @media (max-width: 490px) {
     width: 100px;
     height: 100px;
     margin-bottom: 20px;
-    
+
     /* 모바일에서 멤버별 색상 테마를 프로필 이미지에 적용 */
     &.member-minchan img {
       background: linear-gradient(135deg, ${MEMBERS.minchan.color.mobile.primary} 0%, ${MEMBERS.minchan.color.mobile.secondary} 100%);
     }
-    
+
     &.member-rokwon img {
       background: linear-gradient(135deg, ${MEMBERS.rokwon.color.mobile.primary} 0%, ${MEMBERS.rokwon.color.mobile.secondary} 100%);
     }
-    
+
     &.member-taejin img {
       background: linear-gradient(135deg, ${MEMBERS.taejin.color.mobile.primary} 0%, ${MEMBERS.taejin.color.mobile.secondary} 100%);
     }
-    
+
     &.member-doyeon img {
       background: linear-gradient(135deg, ${MEMBERS.doyeon.color.mobile.primary} 0%, ${MEMBERS.doyeon.color.mobile.secondary} 100%);
+    }
+
+    &.member-jihye img {
+      background: linear-gradient(135deg, ${MEMBERS.jihye.color.mobile.primary} 0%, ${MEMBERS.jihye.color.mobile.secondary} 100%);
+    }
+
+    &.member-jihyeok img {
+      background: linear-gradient(135deg, ${MEMBERS.jihyeok.color.mobile.primary} 0%, ${MEMBERS.jihyeok.color.mobile.secondary} 100%);
     }
   }
 `
@@ -878,8 +866,6 @@ const MemberName = styled.div`
     margin-bottom: 6px;
   }
 `
-
-
 
 const MemberStats = styled.div`
   position: relative;
@@ -902,7 +888,7 @@ const StatItem = styled.div`
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   border: 0.5px solid rgba(255, 255, 255, 0.08);
   transition: all 0.2s ease;
-  
+
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.15);
@@ -924,7 +910,8 @@ const StatValue = styled.span`
   }
 `
 
-const PlayingEmoji = styled.div`  position: absolute;
+const PlayingEmoji = styled.div`
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -935,7 +922,8 @@ const PlayingEmoji = styled.div`  position: absolute;
   animation: pulse 1.5s ease-in-out infinite;
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       transform: translate(-50%, -50%) scale(1);
     }
     50% {
@@ -985,22 +973,16 @@ const TrackCard = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 25px;
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.2),
-    0 8px 16px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform: translateY(0) scale(1);
   z-index: 1;
-  
+
   &:hover {
     transform: translateY(-8px) scale(1.02);
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 
-      0 30px 60px rgba(0, 0, 0, 0.3),
-      0 12px 24px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   @media (max-width: 490px) {
@@ -1009,7 +991,7 @@ const TrackCard = styled.div`
     border-radius: 16px;
     transform: none !important;
     z-index: 1;
-    
+
     &:hover {
       transform: none !important;
     }
@@ -1021,15 +1003,15 @@ const TrackCardHeader = styled.div<{ isEven: boolean }>`
   text-align: center;
   padding-bottom: 15px;
   margin-bottom: 0;
-  
+
   /* 짝수 트랙의 경우 텍스트 정렬을 오른쪽으로 */
-  text-align: ${props => props.isEven ? 'right' : 'left'};
+  text-align: ${(props) => (props.isEven ? 'right' : 'left')};
 `
 
 const TrackHeaderContent = styled.div<{ isEven: boolean }>`
   display: flex;
   flex-direction: column;
-  align-items: ${props => props.isEven ? 'flex-end' : 'flex-start'};
+  align-items: ${(props) => (props.isEven ? 'flex-end' : 'flex-start')};
   gap: 8px;
   margin-bottom: 0;
 `
@@ -1045,7 +1027,7 @@ const TrackNumber = styled.div`
   font-weight: 500;
   color: white;
   letter-spacing: 1px;
-  
+
   @media (max-width: 490px) {
     font-size: 14px;
   }
@@ -1057,7 +1039,7 @@ const TrackTitle = styled.div`
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.5px;
-  
+
   @media (max-width: 490px) {
     font-size: 18px;
   }
@@ -1077,12 +1059,12 @@ const PracticeHistoryTitle = styled.div`
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: 20px;
   text-align: center;
-  
+
   /* 데스크탑에서는 숨김 */
   @media (min-width: 491px) {
     display: none;
   }
-  
+
   @media (max-width: 490px) {
     font-size: 16px;
   }
@@ -1105,7 +1087,7 @@ const PracticeHistoryItem = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   overflow: visible;
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.12);
     border-color: rgba(255, 255, 255, 0.2);
@@ -1124,7 +1106,7 @@ const PracticeWeek = styled.div`
   font-size: 16px;
   font-weight: 600;
   color: white;
-  
+
   @media (max-width: 490px) {
     font-size: 14px;
   }
@@ -1133,7 +1115,7 @@ const PracticeWeek = styled.div`
 const PracticeDate = styled.div`
   font-size: 14px;
   color: rgba(255, 255, 255, 0.7);
-  
+
   @media (max-width: 490px) {
     font-size: 12px;
   }
@@ -1149,12 +1131,12 @@ const PlayButton = styled.div`
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
-  
+
   &:hover {
     background: rgba(102, 126, 234, 0.3);
     transform: scale(1.1);
   }
-  
+
   @media (max-width: 490px) {
     width: 40px;
     height: 40px;
@@ -1204,9 +1186,9 @@ const TrackContent = styled.div<{ isEven: boolean }>`
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 15px;
-  
+
   /* 짝수 트랙의 경우 순서를 바꿈 */
-  flex-direction: ${props => props.isEven ? 'row-reverse' : 'row'};
+  flex-direction: ${(props) => (props.isEven ? 'row-reverse' : 'row')};
 
   & > div {
     flex: 1;
@@ -1251,10 +1233,9 @@ const CopyrightSection = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 `
 
-const CopyrightText = styled.div`  font-size: 14px;
+const CopyrightText = styled.div`
+  font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.5px;
 `
-
-

@@ -27,14 +27,16 @@ const Background = ({ currentMember }: BackgroundProps) => {
     // 멤버별 색상 정의
     const getMemberColor = (memberKey: string | null) => {
       if (!memberKey) return { r: 255, g: 255, b: 255 } // 기본 흰색
-      
-        const memberColors = {
-          minchan : { r: 255, g: 89, b: 94 }, // 민찬: 빨간색 계열
-          rokwon : { r: 138, g: 43, b: 226 }, // 록원: 보라색 계열
-          taejin: { r: 0, g: 191, b: 255 },   // 태진: 하늘색 계열
-          doyeon: { r: 50, g: 205, b: 50 },   // 도연: 초록색 계열
-        }
-      
+
+      const memberColors = {
+        minchan: { r: 255, g: 89, b: 94 }, // 민찬: 빨간색 계열
+        rokwon: { r: 138, g: 43, b: 226 }, // 록원: 보라색 계열
+        taejin: { r: 0, g: 191, b: 255 }, // 태진: 하늘색 계열
+        doyeon: { r: 50, g: 205, b: 50 }, // 도연: 초록색 계열
+        jihye: { r: 228, g: 248, b: 101 }, // 지혜: 노란색 계열
+        jihyeok: { r: 248, g: 173, b: 82 }, // 지혁: 주황색 계열
+      }
+
       return memberColors[memberKey as keyof typeof memberColors] || { r: 255, g: 255, b: 255 }
     }
 
@@ -47,14 +49,15 @@ const Background = ({ currentMember }: BackgroundProps) => {
       isActive: boolean
       initialScale: number
     }> = []
-    
+
     const maxRadius = 400
     const baseSpeed = 1.2 // 0.8에서 1.2로 더 빠르게
     let patternTimer = 0
     const patternInterval = 3000 // 6초에서 4초로 줄여서 더 역동적으로
-    
+
     // 초기 파장들 생성 (비활성 상태로)
-    for (let i = 0; i < 3; i++) { // 3개 파동
+    for (let i = 0; i < 3; i++) {
+      // 3개 파동
       waves.push({
         radius: 0,
         speed: baseSpeed + Math.random() * 0.3, // 속도 변동을 줄여서 더 정교하게
@@ -64,13 +67,13 @@ const Background = ({ currentMember }: BackgroundProps) => {
         initialScale: 0.2, // 더욱 미묘한 시작 스케일
       })
     }
-    
+
     // 3초 후에 첫 번째 패턴 시작
     const startAnimation = () => {
       createPattern()
       animate()
     }
-    
+
     // '두둥 둥' 패턴 생성
     const createPattern = () => {
       // 모든 파동을 초기화하고 활성화
@@ -103,47 +106,47 @@ const Background = ({ currentMember }: BackgroundProps) => {
         }
       })
     }
-    
+
     setTimeout(startAnimation, 2000)
-    
+
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
+
       // 패턴 타이머 업데이트
       patternTimer += 16.67 // 약 60fps
-      
+
       // interval 마다 새로운 패턴 생성 (기존 패턴이 완전히 끝난 후)
       if (patternTimer >= patternInterval) {
         // 모든 파동이 비활성 상태인지 확인
-        const allWavesInactive = waves.every(wave => !wave.isActive)
+        const allWavesInactive = waves.every((wave) => !wave.isActive)
         if (allWavesInactive) {
           patternTimer = 0
           createPattern()
         }
       }
-      
+
       // 모든 파장 업데이트 및 그리기
       waves.forEach((wave, _) => {
         if (wave.isActive) {
           wave.radius += wave.speed
           // 파동이 퍼질수록 희미해지도록 투명도 조정 (더욱 부드럽게)
           wave.opacity = Math.max(0, 1 - (wave.radius / maxRadius) * 0.6)
-          
-          if (wave.opacity > 0.005) { // 더욱 미묘한 임계값
+
+          if (wave.opacity > 0.005) {
+            // 더욱 미묘한 임계값
             // "두둥 둥" 느낌을 위한 스케일 애니메이션 (더욱 부드럽게)
-            const scale = wave.radius < 80 ? 
-              wave.initialScale + (wave.radius / 80) * (1 - wave.initialScale) : 1
-            
+            const scale = wave.radius < 80 ? wave.initialScale + (wave.radius / 80) * (1 - wave.initialScale) : 1
+
             // 멤버별 색상 적용
             const memberColor = getMemberColor(currentMember || null)
-            
+
             // 메인 원 (더욱 미묘하고 세련되게)
             ctx.beginPath()
             ctx.arc(canvas.width / 2, canvas.height / 2, wave.radius, 0, Math.PI * 2)
             ctx.strokeStyle = `rgba(${memberColor.r}, ${memberColor.g}, ${memberColor.b}, ${wave.opacity * 0.25})` // 멤버별 색상
             ctx.lineWidth = wave.thickness * scale
             ctx.stroke()
-            
+
             // 보조 원 (안쪽, 더욱 미묘하게)
             if (wave.radius > 25) {
               ctx.beginPath()
@@ -152,7 +155,7 @@ const Background = ({ currentMember }: BackgroundProps) => {
               ctx.lineWidth = 1
               ctx.stroke()
             }
-            
+
             // 세 번째 원 (가장 미묘한 효과)
             if (wave.radius > 40) {
               ctx.beginPath()
@@ -167,7 +170,7 @@ const Background = ({ currentMember }: BackgroundProps) => {
           }
         }
       })
-      
+
       requestAnimationFrame(animate)
     }
 
@@ -209,13 +212,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    circle at 50% 50%,
-    transparent 0%,
-    rgba(20, 20, 20, 0.08) 30%,
-    rgba(15, 15, 15, 0.12) 60%,
-    rgba(10, 10, 10, 0.18) 100%
-  );
+  background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(20, 20, 20, 0.08) 30%, rgba(15, 15, 15, 0.12) 60%, rgba(10, 10, 10, 0.18) 100%);
   pointer-events: none;
   z-index: 1;
 `

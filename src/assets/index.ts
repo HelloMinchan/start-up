@@ -27,7 +27,7 @@ export const MEMBERS = {
     role: '기타',
     profile: new URL('./profile/rokwon.png', import.meta.url).href,
     sound: new URL('./sound/rokwon.m4a', import.meta.url).href,
-    emoji: '⚡️',
+    emoji: '🎸',
     color: {
       primary: 'rgba(102, 126, 234, 0.15)',
       secondary: 'rgba(118, 75, 162, 0.15)',
@@ -64,6 +64,36 @@ export const MEMBERS = {
       mobile: {
         primary: 'rgba(67, 233, 123, 0.2)',
         secondary: 'rgba(56, 249, 215, 0.2)',
+      },
+    },
+  },
+  jihye: {
+    name: '지혜',
+    role: '보컬',
+    profile: new URL('./profile/jihye.png', import.meta.url).href,
+    sound: new URL('./sound/jihye.m4a', import.meta.url).href,
+    emoji: '🎤',
+    color: {
+      primary: 'rgba(228, 248, 101, 0.15)',
+      secondary: 'rgba(228, 248, 101, 0.15)',
+      mobile: {
+        primary: 'rgba(228, 248, 101, 0.15)',
+        secondary: 'rgba(228, 248, 101, 0.15)',
+      },
+    },
+  },
+  jihyeok: {
+    name: '지혁',
+    role: '기타',
+    profile: new URL('./profile/jihyeok.png', import.meta.url).href,
+    sound: null,
+    emoji: '🎸',
+    color: {
+      primary: 'rgba(248, 173, 82, 0.15)',
+      secondary: 'rgba(248, 173, 82, 0.15)',
+      mobile: {
+        primary: 'rgba(248, 173, 82, 0.15)',
+        secondary: 'rgba(248, 173, 82, 0.15)',
       },
     },
   },
