@@ -400,7 +400,7 @@ const Head = styled.div`
   margin-top: 80px;
   width: 100%;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     margin-top: 50px;
   }
 `
@@ -413,7 +413,7 @@ const HeadContent = styled.div`
   justify-content: center;
   padding: 50px 0;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     padding: 30px 0;
   }
 `
@@ -431,7 +431,7 @@ const HeadRight = styled.div`
   text-align: center;
   color: white;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     max-width: 100%;
   }
 `
@@ -442,7 +442,7 @@ const HeadTitle = styled.h1`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     margin-bottom: 40px;
   }
 `
@@ -452,7 +452,7 @@ const HeadLogo = styled.img`
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     height: 110px;
   }
 `
@@ -468,7 +468,7 @@ const HeadDescription = styled.div`
   margin-right: auto;
   text-align: center;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 20px;
     margin-bottom: 40px;
     line-height: 1.6;
@@ -481,7 +481,7 @@ const HeadStats = styled.div`
   justify-content: center;
   flex-wrap: nowrap;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     gap: 15px;
     flex-wrap: wrap;
   }
@@ -510,7 +510,7 @@ const HeadStatItem = styled.div`
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     padding: 18px 20px;
     min-width: 90px;
     max-width: none;
@@ -526,7 +526,7 @@ const HeadStatNumber = styled.div`
   text-align: center;
   line-height: 1;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 26px;
     margin-bottom: 8px;
   }
@@ -541,7 +541,7 @@ const HeadStatLabel = styled.div`
   text-align: center;
   line-height: 1.2;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 13px;
     letter-spacing: 1px;
   }
@@ -551,7 +551,7 @@ const Logo = styled.img`
   max-width: 300px;
   object-fit: contain;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     width: 55vw;
   }
 `
@@ -591,7 +591,7 @@ const SectionTitle = styled.div`
     border-radius: 2px;
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     margin-top: 50px;
     font-size: 28px;
   }
@@ -601,14 +601,18 @@ const MemberSection = styled.div`
   margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
+  gap: 0px 100px;
   justify-items: center;
+  max-width: calc(200px * 3 + 100px * 2);
+  margin-left: auto;
+  margin-right: auto;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     margin-top: 20px;
     grid-template-columns: repeat(2, 160px);
-    gap: 16px;
+    gap: 0px 16px;
     justify-content: center;
+    max-width: none; /* 모바일에서는 제한 해제 */
   }
 `
 
@@ -666,7 +670,7 @@ const MemberContent = styled.div`
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 6px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
-    @media (max-width: 490px) {
+    @media (max-width: 600px) {
       transform: none;
       background: transparent;
       border-color: transparent;
@@ -680,9 +684,9 @@ const MemberContent = styled.div`
     }
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     max-width: 160px;
-    height: 240px;
+    height: 210px;
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -692,9 +696,9 @@ const MemberContent = styled.div`
     overflow: visible;
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     max-width: 160px;
-    height: 240px;
+    height: 210px;
     background: transparent !important;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -724,7 +728,7 @@ const PostitWrapper = styled.div`
   padding: 20px;
   box-sizing: border-box;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     padding: 0;
 
     &::before {
@@ -743,7 +747,7 @@ const Postit = styled.div`
   border-radius: 20px;
   pointer-events: none;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     display: none;
   }
 `
@@ -770,7 +774,7 @@ const MemberIcon = styled.div`
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 40px;
     bottom: 0px;
     right: 0px;
@@ -819,7 +823,7 @@ const OverlayImage = styled.div`
     background: linear-gradient(135deg, ${MEMBERS.jihyeok.color.primary} 0%, ${MEMBERS.jihyeok.color.secondary} 100%);
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     width: 100px;
     height: 100px;
     margin-bottom: 20px;
@@ -861,7 +865,7 @@ const MemberName = styled.div`
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   z-index: 2;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 20px;
     margin-bottom: 6px;
   }
@@ -894,7 +898,7 @@ const StatItem = styled.div`
     border-color: rgba(255, 255, 255, 0.15);
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     padding: 6px 10px;
     font-size: 12px;
     border-radius: 6px;
@@ -905,7 +909,7 @@ const StatValue = styled.span`
   font-size: 14px;
   font-weight: 600;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 12px;
   }
 `
@@ -931,7 +935,7 @@ const PlayingEmoji = styled.div`
     }
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 50px;
   }
 `
@@ -944,7 +948,7 @@ const TracksContainer = styled.div`
   gap: 30px;
   justify-items: center;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
     gap: 20px;
     margin-top: 30px;
@@ -959,7 +963,7 @@ const TrackRow = styled.div<{ isEven: boolean }>`
   margin-bottom: 60px;
   padding: 0;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     margin-bottom: 40px;
   }
 `
@@ -985,7 +989,7 @@ const TrackCard = styled.div`
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     max-width: 100%;
     padding: 20px;
     border-radius: 16px;
@@ -1028,7 +1032,7 @@ const TrackNumber = styled.div`
   color: white;
   letter-spacing: 1px;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 14px;
   }
 `
@@ -1040,7 +1044,7 @@ const TrackTitle = styled.div`
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.5px;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 18px;
   }
 `
@@ -1065,7 +1069,7 @@ const PracticeHistoryTitle = styled.div`
     display: none;
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 16px;
   }
 `
@@ -1107,7 +1111,7 @@ const PracticeWeek = styled.div`
   font-weight: 600;
   color: white;
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 14px;
   }
 `
@@ -1116,7 +1120,7 @@ const PracticeDate = styled.div`
   font-size: 14px;
   color: rgba(255, 255, 255, 0.7);
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     font-size: 12px;
   }
 `
@@ -1137,7 +1141,7 @@ const PlayButton = styled.div`
     transform: scale(1.1);
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     width: 40px;
     height: 40px;
   }
@@ -1194,7 +1198,7 @@ const TrackContent = styled.div<{ isEven: boolean }>`
     flex: 1;
   }
 
-  @media (max-width: 490px) {
+  @media (max-width: 600px) {
     flex-direction: column;
     gap: 20px;
     margin-top: 20px;
