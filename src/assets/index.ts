@@ -140,7 +140,7 @@ export const TRACKS = {
     description: '25.09.16 ~ 🔥',
     youtubeId: 'Y39aDxwpt6o?si=ZibT-v9SfpyLKpQ6',
     status: 'practicing',
-    practiceHistory: [],
+    practiceHistory: [{ week: 2, date: '25.09.25', sound: new URL('./sound/track4/week2.m4a', import.meta.url).href }],
   },
 } as const
 

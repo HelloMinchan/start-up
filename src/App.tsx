@@ -310,6 +310,7 @@ function App() {
         </TracksContainer>
 
         <CopyrightSection>
+          <TeamOfficialMailText>band.startup.official@gmail.com</TeamOfficialMailText>
           <CopyrightText>© 2025 start-up.band</CopyrightText>
         </CopyrightSection>
       </Layout>
@@ -1231,6 +1232,7 @@ const CopyrightSection = styled.div`
   margin-top: 100px;
   margin-bottom: 40px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px 0;
@@ -1238,6 +1240,14 @@ const CopyrightSection = styled.div`
 `
 
 const CopyrightText = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.5px;
+`
+
+const TeamOfficialMailText = styled.div`
+  margin-bottom: 10px;
   font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
