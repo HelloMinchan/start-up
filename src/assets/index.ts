@@ -126,7 +126,7 @@ export const TRACKS = {
   track3: {
     title: '박하사탕',
     description: '25.08.07 ~ 25.09.04',
-    youtubeId: 'fDQzDsAW434?si=plBauuN_dba4V8E1',
+    youtubeId: '60uKfc_YIOE?si=Qm2jFgWn2LRzwkRU',
     status: 'completed',
     practiceHistory: [
       { week: 1, date: '25.08.07', sound: new URL('./sound/track3/week1.m4a', import.meta.url).href },
