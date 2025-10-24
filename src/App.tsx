@@ -323,10 +323,11 @@ function App() {
         <RulesContainer>
           <RuleItem>
             <>하나. 연습곡은 공정하게 번갈아가며 선정합니다.</>
-            <RuleSubItem style={{ marginTop: '-17px' }}>(록원 ﹥ 태진 ﹥ 지혜 ﹥ 도연 ﹥ 지혁 ﹥ 민찬)</RuleSubItem>
+            <RuleSubItem>(록원 ﹥ 태진 ﹥ 지혜 ﹥ 도연 ﹥ 지혁 ﹥ 민찬)</RuleSubItem>
           </RuleItem>
           <RuleItem>둘. 선정된 곡은 내가 고른 곡처럼 즐겁게 연주합니다.</RuleItem>
-          <RuleItem>셋. 회비는 매월 10만원입니다.</RuleItem>
+          <RuleItem>셋. 하나의 곡이 마무리되면 기념 회식을 합니다.</RuleItem>
+          <RuleItem>넷. 회비는 매월 7일 10만원입니다.</RuleItem>
         </RulesContainer>
 
         <CopyrightSection>
@@ -1308,9 +1309,11 @@ const RuleItem = styled.div`
   }
 `
 const RuleSubItem = styled.div`
+  margin-top: -25px;
   font-size: 18px;
 
   @media (max-width: 600px) {
+    margin-top: -17px;
     font-size: 13px;
   }
 `
