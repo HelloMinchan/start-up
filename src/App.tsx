@@ -327,7 +327,8 @@ function App() {
           </RuleItem>
           <RuleItem>둘. 선정된 곡은 내가 고른 곡처럼 즐겁게 연주합니다.</RuleItem>
           <RuleItem>셋. 하나의 곡이 마무리되면 기념 회식을 합니다.</RuleItem>
-          <RuleItem>넷. 회비는 매월 7일 10만원입니다.</RuleItem>
+          <RuleItem>넷. 합주 연습은 매주 목요일 8시입니다.</RuleItem>
+          <RuleItem>다섯. 회비는 매월 7일 10만원입니다.</RuleItem>
         </RulesContainer>
 
         <CopyrightSection>
