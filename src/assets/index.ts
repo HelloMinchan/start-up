@@ -137,12 +137,13 @@ export const TRACKS = {
   },
   track4: {
     title: '밤이 깊었네 (Drama Ver.)',
-    description: '25.09.16 ~ 🔥',
+    description: '25.09.16 ~ 25.10.23',
     youtubeId: 'Y39aDxwpt6o?si=ZibT-v9SfpyLKpQ6',
     status: 'practicing',
     practiceHistory: [
       { week: 2, date: '25.09.25', sound: new URL('./sound/track4/week2.m4a', import.meta.url).href },
       { week: 3, date: '25.10.16', sound: new URL('./sound/track4/week3.m4a', import.meta.url).href },
+      { week: 4, date: '25.10.23', sound: new URL('./sound/track4/week4.m4a', import.meta.url).href },
     ],
   },
 } as const

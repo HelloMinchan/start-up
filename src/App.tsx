@@ -132,6 +132,16 @@ function App() {
             <TOCIcon>🎵</TOCIcon>
             <TOCLabel>Tracks</TOCLabel>
           </TOCItem>
+          <TOCItem
+            onClick={() => {
+              const tracksTitle = document.querySelector('[data-section="rules"]')
+              tracksTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }}
+            isActive={activeSection === 'rules'}
+          >
+            <TOCIcon>🧾</TOCIcon>
+            <TOCLabel>Rules</TOCLabel>
+          </TOCItem>
         </TOCSidebar>
 
         <Head data-section="head">
@@ -308,6 +318,16 @@ function App() {
             </TrackRow>
           ))}
         </TracksContainer>
+
+        <SectionTitle data-section="rules">Rules</SectionTitle>
+        <RulesContainer>
+          <RuleItem>
+            <>하나. 연습곡은 공정하게 번갈아가며 선정합니다.</>
+            <RuleSubItem style={{ marginTop: '-17px' }}>(록원 ﹥ 태진 ﹥ 지혜 ﹥ 도연 ﹥ 지혁 ﹥ 민찬)</RuleSubItem>
+          </RuleItem>
+          <RuleItem>둘. 선정된 곡은 내가 고른 곡처럼 즐겁게 연주합니다.</RuleItem>
+          <RuleItem>셋. 회비는 매월 10만원입니다.</RuleItem>
+        </RulesContainer>
 
         <CopyrightSection>
           <TeamOfficialMailText>band.startup.official@gmail.com</TeamOfficialMailText>
@@ -1252,4 +1272,45 @@ const TeamOfficialMailText = styled.div`
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.5px;
+`
+
+const RulesContainer = styled.div`
+  width: 100%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr; /* 기본적으로 한 행에 하나씩 */
+  gap: 30px;
+  justify-items: center;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 30px;
+  }
+`
+const RuleItem = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  justify-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+  }
+`
+const RuleSubItem = styled.div`
+  font-size: 18px;
+
+  @media (max-width: 600px) {
+    font-size: 13px;
+  }
 `
