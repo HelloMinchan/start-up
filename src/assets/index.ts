@@ -151,7 +151,10 @@ export const TRACKS = {
     description: '25.11.30 ~',
     youtubeId: 'UUqQvu3z5ZI?si=1AloOZtac0f63Wow',
     status: 'practicing',
-    practiceHistory: [{ week: 1, date: '25.11.30', sound: new URL('./sound/track5/week1.m4a', import.meta.url).href }],
+    practiceHistory: [
+      { week: 1, date: '25.10.30', sound: new URL('./sound/track5/week1.m4a', import.meta.url).href },
+      { week: 2, date: '25.11.13', sound: new URL('./sound/track5/week2.m4a', import.meta.url).href },
+    ],
   },
 } as const
 
