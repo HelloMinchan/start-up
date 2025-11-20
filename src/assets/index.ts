@@ -154,6 +154,7 @@ export const TRACKS = {
     practiceHistory: [
       { week: 1, date: '25.10.30', sound: new URL('./sound/track5/week1.m4a', import.meta.url).href },
       { week: 2, date: '25.11.13', sound: new URL('./sound/track5/week2.m4a', import.meta.url).href },
+      { week: 3, date: '25.11.20', sound: new URL('./sound/track5/week3.m4a', import.meta.url).href },
     ],
   },
 } as const
