@@ -158,6 +158,13 @@ export const TRACKS = {
       { week: 4, date: '25.11.27', sound: new URL('./sound/track5/week4.m4a', import.meta.url).href },
     ],
   },
+  track6: {
+    title: 'All I Want For Christmas Is You',
+    description: '25.12.04 ~',
+    youtubeId: 'uimgSQE1Vnc?si=yx_fJc86f_62qty9',
+    status: 'practicing',
+    practiceHistory: [],
+  },
 } as const
 
 // 로고 이미지
