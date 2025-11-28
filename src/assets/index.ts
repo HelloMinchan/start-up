@@ -148,7 +148,7 @@ export const TRACKS = {
   },
   track5: {
     title: '안녕 (Hello)',
-    description: '25.11.30 ~ 25.11.27',
+    description: '25.10.30 ~ 25.11.27',
     youtubeId: 'UUqQvu3z5ZI?si=1AloOZtac0f63Wow',
     status: 'completed',
     practiceHistory: [
