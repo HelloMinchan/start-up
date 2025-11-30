@@ -165,3 +165,20 @@ body {
 .Typewriter__wrapper {
   font-weight: 500;
 }
+
+/* Christmas */
+.snowflake {
+  position: fixed;
+  top: -30px;
+  color: white;
+  pointer-events: none;
+  user-select: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}

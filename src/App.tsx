@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import Typewriter from 'typewriter-effect'
 import { LOGO_IMAGES, MEMBERS, TRACKS } from './assets'
+import ChristmasHatImg from './assets/christmas-hat.png'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -10,6 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite'
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled'
 import Background from './components/Background'
+import { Snowfall } from './components/Snowfall'
 
 function App() {
   const [isVisible, setIsVisible] = useState(false)
@@ -97,6 +99,7 @@ function App() {
 
   return (
     <Container>
+      <Snowfall count={70} />
       <Background
         currentMember={playingMember ? Object.keys(MEMBERS).find((key) => MEMBERS[key as keyof typeof MEMBERS].name === playingMember) : null}
       />
@@ -237,6 +240,7 @@ function App() {
               <PostitWrapper>
                 <Postit />
                 <OverlayImage data-member={key} className={`member-${key}`} style={{ opacity: playingMember === member.name ? 0.3 : 1 }}>
+                  <ChristmasHat src={ChristmasHatImg} />
                   <img src={member.profile} alt={member.name} />
                   <MemberIcon>{member.emoji}</MemberIcon>
                 </OverlayImage>
@@ -646,7 +650,6 @@ const MemberContent = styled.div`
   cursor: pointer;
   position: relative;
   border-radius: 20px;
-  overflow: hidden;
   background: transparent;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
@@ -1316,5 +1319,32 @@ const RuleSubItem = styled.div`
   @media (max-width: 600px) {
     margin-top: -17px;
     font-size: 13px;
+  }
+`
+
+/**
+ * Christmas
+ */
+const ChristmasHat = styled.img`
+  all: unset;
+  display: block;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  object-fit: contain !important;
+  background-color: none !important;
+  background: none !important;
+
+  position: absolute;
+  top: -75px;
+  left: 15%;
+  max-width: 120px;
+  z-index: 50;
+  pointer-events: none;
+
+  @media (max-width: 600px) {
+    top: -50px;
+    left: 20%;
+    max-width: 70px;
   }
 `
