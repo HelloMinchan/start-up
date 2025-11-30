@@ -99,7 +99,7 @@ function App() {
 
   return (
     <Container>
-      <Snowfall count={70} />
+      <Snowfall />
       <Background
         currentMember={playingMember ? Object.keys(MEMBERS).find((key) => MEMBERS[key as keyof typeof MEMBERS].name === playingMember) : null}
       />

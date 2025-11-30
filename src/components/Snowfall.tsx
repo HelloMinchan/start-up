@@ -1,9 +1,19 @@
 import { useEffect, useState } from 'react'
 
-export const Snowfall = ({ count = 100 }) => {
+export const Snowfall = () => {
+  const [count, setCount] = useState(() => (window.innerWidth <= 600 ? 40 : 70))
   const [snowflakes, setSnowflakes] = useState([])
 
-  // 한 번만 생성
+  // 화면 크기 변경 시 count 업데이트
+  useEffect(() => {
+    const handleResize = () => {
+      setCount(window.innerWidth <= 600 ? 40 : 70)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // count 변경될 때마다 눈송이 생성
   useEffect(() => {
     const flakes = Array.from({ length: count }).map(() => ({
       left: Math.random() * 100,
@@ -27,7 +37,7 @@ export const Snowfall = ({ count = 100 }) => {
             animationDelay: `${flake.delay}s`,
           }}
         >
-          ❄
+          ✻
         </div>
       ))}
     </>
