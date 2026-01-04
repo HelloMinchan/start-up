@@ -158,6 +158,13 @@ export const TRACKS = {
       { week: 4, date: '25.11.27', sound: new URL('./sound/track5/week4.m4a', import.meta.url).href },
     ],
   },
+  track6: {
+    title: 'ㅈㅣㅂ (H O M E)',
+    description: '26.01.08 ~',
+    youtubeId: 'U4-cz9NHQv4?si=of1Trgk11uZuh4Wh',
+    status: 'practicing',
+    practiceHistory: [],
+  },
 } as const
 
 // 로고 이미지

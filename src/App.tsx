@@ -3,6 +3,8 @@ import styled from '@emotion/styled'
 import Typewriter from 'typewriter-effect'
 import { LOGO_IMAGES, MEMBERS, TRACKS } from './assets'
 import ChristmasHatImg from './assets/christmas-hat.png'
+import LighterSound from './assets/sound/midi/lighter.mp3'
+import SirenSound from './assets/sound/midi/siren.mp3'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -334,6 +336,48 @@ function App() {
           <RuleItem>넷. 합주 연습은 매주 목요일 8시입니다.</RuleItem>
           <RuleItem>다섯. 회비는 매월 7일 10만원입니다.</RuleItem>
         </RulesContainer>
+
+        <SectionTitle data-section="rules">MIDI</SectionTitle>
+
+        <PracticeHistoryList style={{ marginTop: '50px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+          <PracticeHistoryItem key={'midi-lighter-sound'}>
+            <PracticeInfo>
+              <PracticeWeek>라이터 소리</PracticeWeek>
+              <PracticeDate>#6 ㅈㅣㅂ (H O M E)</PracticeDate>
+              {playingMember === `midi-lighter-sound` && (
+                <ProgressBarContainer>
+                  <ProgressBar style={{ width: `${progress}%` }} />
+                </ProgressBarContainer>
+              )}
+            </PracticeInfo>
+            <PlayButton onClick={() => playSound(LighterSound, `midi-lighter-sound`)}>
+              {playingMember === `midi-lighter-sound` ? (
+                <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
+              ) : (
+                <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
+              )}
+            </PlayButton>
+          </PracticeHistoryItem>
+
+          <PracticeHistoryItem key={'midi-siren-sound'}>
+            <PracticeInfo>
+              <PracticeWeek>사이렌 소리</PracticeWeek>
+              <PracticeDate>#6 ㅈㅣㅂ (H O M E)</PracticeDate>
+              {playingMember === `midi-siren-sound` && (
+                <ProgressBarContainer>
+                  <ProgressBar style={{ width: `${progress}%` }} />
+                </ProgressBarContainer>
+              )}
+            </PracticeInfo>
+            <PlayButton onClick={() => playSound(SirenSound, `midi-siren-sound`)}>
+              {playingMember === `midi-siren-sound` ? (
+                <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
+              ) : (
+                <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
+              )}
+            </PlayButton>
+          </PracticeHistoryItem>
+        </PracticeHistoryList>
 
         <CopyrightSection>
           <TeamOfficialMailText>band.startup.official@gmail.com</TeamOfficialMailText>
