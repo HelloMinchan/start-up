@@ -5,6 +5,7 @@ import { LOGO_IMAGES, MEMBERS, TRACKS } from './assets'
 import ChristmasHatImg from './assets/christmas-hat.png'
 import LighterSound from './assets/sound/midi/lighter.mp3'
 import SirenSound from './assets/sound/midi/siren.mp3'
+import FirewoodSound from './assets/sound/midi/firewood.mp3'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -342,7 +343,7 @@ function App() {
         <PracticeHistoryList style={{ marginTop: '50px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
           <PracticeHistoryItem key={'midi-lighter-sound'}>
             <PracticeInfo>
-              <PracticeWeek>라이터 소리</PracticeWeek>
+              <PracticeWeek>인트로 라이터 소리</PracticeWeek>
               <PracticeDate>#6 ㅈㅣㅂ (H O M E)</PracticeDate>
               {playingMember === `midi-lighter-sound` && (
                 <ProgressBarContainer>
@@ -371,6 +372,25 @@ function App() {
             </PracticeInfo>
             <PlayButton onClick={() => playSound(SirenSound, `midi-siren-sound`)}>
               {playingMember === `midi-siren-sound` ? (
+                <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
+              ) : (
+                <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
+              )}
+            </PlayButton>
+          </PracticeHistoryItem>
+
+          <PracticeHistoryItem key={'midi-firewood-sound'}>
+            <PracticeInfo>
+              <PracticeWeek>장작불 태우는 소리</PracticeWeek>
+              <PracticeDate>#6 ㅈㅣㅂ (H O M E)</PracticeDate>
+              {playingMember === `midi-firewood-sound` && (
+                <ProgressBarContainer>
+                  <ProgressBar style={{ width: `${progress}%` }} />
+                </ProgressBarContainer>
+              )}
+            </PracticeInfo>
+            <PlayButton onClick={() => playSound(FirewoodSound, `midi-firewood-sound`)}>
+              {playingMember === `midi-firewood-sound` ? (
                 <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
               ) : (
                 <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
