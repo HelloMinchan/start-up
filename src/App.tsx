@@ -102,7 +102,7 @@ function App() {
 
   return (
     <Container>
-      <Snowfall />
+      {/* <Snowfall /> */}
       <Background
         currentMember={playingMember ? Object.keys(MEMBERS).find((key) => MEMBERS[key as keyof typeof MEMBERS].name === playingMember) : null}
       />
@@ -243,7 +243,7 @@ function App() {
               <PostitWrapper>
                 <Postit />
                 <OverlayImage data-member={key} className={`member-${key}`} style={{ opacity: playingMember === member.name ? 0.3 : 1 }}>
-                  <ChristmasHat src={ChristmasHatImg} />
+                  {/* <ChristmasHat src={ChristmasHatImg} /> */}
                   <img src={member.profile} alt={member.name} />
                   <MemberIcon>{member.emoji}</MemberIcon>
                 </OverlayImage>
