@@ -160,7 +160,7 @@ export const TRACKS = {
   },
   track6: {
     title: 'ㅈㅣㅂ (H O M E)',
-    description: '26.01.08 ~ 26.02.05 ',
+    description: '26.01.08 ~ 26.02.05',
     youtubeId: 'U4-cz9NHQv4?si=of1Trgk11uZuh4Wh',
     status: 'completed',
     practiceHistory: [
@@ -169,6 +169,13 @@ export const TRACKS = {
       { week: 3, date: '26.01.29', sound: new URL('./sound/track6/week3.m4a', import.meta.url).href },
       { week: 4, date: '26.02.05', sound: new URL('./sound/track6/week4.m4a', import.meta.url).href },
     ],
+  },
+  track7: {
+    title: '빨간 운동화',
+    description: '26.03.12 ~',
+    youtubeId: 'CY9NrL3Szvg?si=fZlFPZe3FaS-O4Vr',
+    status: 'practicing',
+    practiceHistory: [{ week: 1, date: '26.03.12', sound: new URL('./sound/track7/week1.m4a', import.meta.url).href }],
   },
 } as const
 
