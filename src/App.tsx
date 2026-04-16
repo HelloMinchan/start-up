@@ -294,26 +294,42 @@ function App() {
 
                       <PracticeHistoryList>
                         {track.practiceHistory ? (
-                          track.practiceHistory.map((practice, practiceIndex) => (
-                            <PracticeHistoryItem key={practice.week}>
-                              <PracticeInfo>
-                                <PracticeWeek>{practice.week}주차</PracticeWeek>
-                                <PracticeDate>({practice.date})</PracticeDate>
-                                {playingMember === `${trackKey}Week${practice.week}` && (
-                                  <ProgressBarContainer>
-                                    <ProgressBar style={{ width: `${progress}%` }} />
-                                  </ProgressBarContainer>
-                                )}
-                              </PracticeInfo>
-                              <PlayButton onClick={() => playSound(practice.sound, `${trackKey}Week${practice.week}`)}>
-                                {playingMember === `${trackKey}Week${practice.week}` ? (
-                                  <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
-                                ) : (
-                                  <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
-                                )}
-                              </PlayButton>
-                            </PracticeHistoryItem>
-                          ))
+                          track.practiceHistory.map((practice, practiceIndex) => {
+                            const isSpecialEvent = isNaN(Number(practice.week))
+
+                            return (
+                              <PracticeHistoryItem key={practice.week}>
+                                <PracticeInfo>
+                                  <PracticeWeek
+                                    style={{
+                                      color: isSpecialEvent ? '#667eea' : 'white',
+                                      fontWeight: isSpecialEvent ? 'bold' : 'bold',
+                                    }}
+                                  >
+                                    {isSpecialEvent ? practice.week : `${practice.week}주차`}
+                                  </PracticeWeek>
+                                  <PracticeDate>({practice.date})</PracticeDate>
+
+                                  {playingMember === `${trackKey}Week${practice.week}` && (
+                                    <ProgressBarContainer>
+                                      <ProgressBar style={{ width: `${progress}%` }} />
+                                    </ProgressBarContainer>
+                                  )}
+                                </PracticeInfo>
+
+                                <PlayButton
+                                  onClick={!isSpecialEvent ? () => playSound(practice.sound, `${trackKey}Week${practice.week}`) : undefined}
+                                  style={{ visibility: isSpecialEvent ? 'hidden' : 'visible' }}
+                                >
+                                  {playingMember === `${trackKey}Week${practice.week}` ? (
+                                    <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
+                                  ) : (
+                                    <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
+                                  )}
+                                </PlayButton>
+                              </PracticeHistoryItem>
+                            )
+                          })
                         ) : (
                           <NoPracticeRecord>연습을 기록할 경황이 없었던 시절..</NoPracticeRecord>
                         )}
@@ -757,7 +773,10 @@ const MemberContent = styled.div`
     img {
       transform: scale(1.05);
       border-color: rgba(255, 255, 255, 0.6);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 6px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.4),
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     @media (max-width: 600px) {
@@ -884,7 +903,10 @@ const OverlayImage = styled.div`
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
   }
 
@@ -1067,7 +1089,10 @@ const TrackCard = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 25px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform: translateY(0) scale(1);
   z-index: 1;
@@ -1076,7 +1101,10 @@ const TrackCard = styled.div`
     transform: translateY(-8px) scale(1.02);
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.3),
+      0 12px 24px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   @media (max-width: 600px) {

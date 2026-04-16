@@ -175,7 +175,18 @@ export const TRACKS = {
     description: '26.03.12 ~',
     youtubeId: 'CY9NrL3Szvg?si=fZlFPZe3FaS-O4Vr',
     status: 'practicing',
-    practiceHistory: [{ week: 1, date: '26.03.12', sound: new URL('./sound/track7/week1.m4a', import.meta.url).href }],
+    practiceHistory: [
+      { week: 1, date: '26.03.12', sound: new URL('./sound/track7/week1.m4a', import.meta.url).href },
+      { week: '제 1회 START-UP 야유회', date: '26.03.26', sound: new URL('./sound/track7/week1.m4a', import.meta.url).href },
+      { week: 2, date: '26.04.16', sound: new URL('./sound/track7/week2.m4a', import.meta.url).href },
+    ],
+  },
+  track8: {
+    title: '금붕어',
+    description: '26.04.16 ~',
+    youtubeId: 'iCqvD9Aa2_g?si=io7OoFwRBd0gEzhg',
+    status: 'practicing',
+    practiceHistory: [{ week: 1, date: '26.04.16', sound: new URL('./sound/track8/week1.m4a', import.meta.url).href }],
   },
 } as const
 
