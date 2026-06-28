@@ -172,9 +172,9 @@ export const TRACKS = {
   },
   track7: {
     title: '빨간 운동화',
-    description: '26.03.12 ~',
+    description: '26.03.12 ~ 26.04.16',
     youtubeId: 'CY9NrL3Szvg?si=fZlFPZe3FaS-O4Vr',
-    status: 'practicing',
+    status: 'completed',
     practiceHistory: [
       { week: 1, date: '26.03.12', sound: new URL('./sound/track7/week1.m4a', import.meta.url).href },
       { week: '제 1회 START-UP 야유회', date: '26.03.26', sound: new URL('./sound/track7/week1.m4a', import.meta.url).href },
@@ -183,10 +183,23 @@ export const TRACKS = {
   },
   track8: {
     title: '금붕어',
-    description: '26.04.16 ~',
+    description: '26.04.16 ~ 26.06.25',
     youtubeId: 'iCqvD9Aa2_g?si=io7OoFwRBd0gEzhg',
+    status: 'completed',
+    practiceHistory: [
+      { week: 1, date: '26.04.16', sound: new URL('./sound/track8/week1.m4a', import.meta.url).href },
+      { week: 2, date: '26.04.30', sound: new URL('./sound/track8/week2.m4a', import.meta.url).href },
+      { week: 3, date: '26.05.14', sound: new URL('./sound/track8/week3.m4a', import.meta.url).href },
+      { week: 4, date: '26.05.21', sound: new URL('./sound/track8/week4.m4a', import.meta.url).href },
+      { week: 5, date: '26.06.25', sound: new URL('./sound/track8/week5.m4a', import.meta.url).href },
+    ],
+  },
+  track9: {
+    title: '스물다섯, 스물하나',
+    description: '26.06.25 ~',
+    youtubeId: 'XdbqK2PDaA0?si=0aPc85FmdFzd3FGK',
     status: 'practicing',
-    practiceHistory: [{ week: 1, date: '26.04.16', sound: new URL('./sound/track8/week1.m4a', import.meta.url).href }],
+    practiceHistory: [{ week: 1, date: '26.06.25', sound: new URL('./sound/track9/week1.m4a', import.meta.url).href }],
   },
 } as const
 
