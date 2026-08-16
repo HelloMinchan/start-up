@@ -196,10 +196,22 @@ export const TRACKS = {
   },
   track9: {
     title: '스물다섯, 스물하나',
-    description: '26.06.25 ~',
+    description: '26.06.25 ~ 26.08.13',
     youtubeId: 'XdbqK2PDaA0?si=0aPc85FmdFzd3FGK',
+    status: 'completed',
+    practiceHistory: [
+      { week: 1, date: '26.06.25', sound: new URL('./sound/track9/week1.m4a', import.meta.url).href },
+      { week: 2, date: '26.07.07', sound: new URL('./sound/track9/week2.m4a', import.meta.url).href },
+      { week: 3, date: '26.07.23', sound: new URL('./sound/track9/week3.m4a', import.meta.url).href },
+      { week: 4, date: '26.08.13', sound: new URL('./sound/track9/week4.m4a', import.meta.url).href },
+    ],
+  },
+  track10: {
+    title: 'Champagne Supernova',
+    description: '26.06.25 ~',
+    youtubeId: 'o4tw2V2_oY8?si=OSRPnmkwZyfZ6kr1',
     status: 'practicing',
-    practiceHistory: [{ week: 1, date: '26.06.25', sound: new URL('./sound/track9/week1.m4a', import.meta.url).href }],
+    practiceHistory: [{ week: 1, date: '26.08.13', sound: new URL('./sound/track10/week1.m4a', import.meta.url).href }],
   },
 } as const
 
