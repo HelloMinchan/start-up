@@ -6,7 +6,7 @@ import ChristmasHatImg from './assets/christmas-hat.png'
 import LighterSound from './assets/sound/midi/lighter.mp3'
 import SirenSound from './assets/sound/midi/siren.mp3'
 import FirewoodSound from './assets/sound/midi/firewood.mp3'
-import WaveSound from './assets/sound/midi/wave.mp3'
+import WaveSound from './assets/sound/midi/wave.mov'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
