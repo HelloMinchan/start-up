@@ -6,6 +6,7 @@ import ChristmasHatImg from './assets/christmas-hat.png'
 import LighterSound from './assets/sound/midi/lighter.mp3'
 import SirenSound from './assets/sound/midi/siren.mp3'
 import FirewoodSound from './assets/sound/midi/firewood.mp3'
+import WaveSound from './assets/sound/midi/wave.mp3'
 
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -407,6 +408,25 @@ function App() {
             </PracticeInfo>
             <PlayButton onClick={() => playSound(FirewoodSound, `midi-firewood-sound`)}>
               {playingMember === `midi-firewood-sound` ? (
+                <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
+              ) : (
+                <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
+              )}
+            </PlayButton>
+          </PracticeHistoryItem>
+
+          <PracticeHistoryItem key={'midi-wave-sound'}>
+            <PracticeInfo>
+              <PracticeWeek>파도 소리</PracticeWeek>
+              <PracticeDate>#6 ㅈㅣㅂ (H O M E)</PracticeDate>
+              {playingMember === `midi-wave-sound` && (
+                <ProgressBarContainer>
+                  <ProgressBar style={{ width: `${progress}%` }} />
+                </ProgressBarContainer>
+              )}
+            </PracticeInfo>
+            <PlayButton onClick={() => playSound(WaveSound, `midi-wave-sound`)}>
+              {playingMember === `midi-wave-sound` ? (
                 <PauseCircleFilledIcon style={{ fontSize: '24px', color: '#667eea' }} />
               ) : (
                 <PlayCircleFilledWhiteIcon style={{ fontSize: '24px', color: '#667eea' }} />
