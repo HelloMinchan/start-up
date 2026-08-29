@@ -208,7 +208,7 @@ export const TRACKS = {
   },
   track10: {
     title: 'Champagne Supernova',
-    description: '26.06.25 ~',
+    description: '26.08.13 ~',
     youtubeId: 'o4tw2V2_oY8?si=OSRPnmkwZyfZ6kr1',
     status: 'practicing',
     practiceHistory: [{ week: 1, date: '26.08.13', sound: new URL('./sound/track10/week1.m4a', import.meta.url).href }],

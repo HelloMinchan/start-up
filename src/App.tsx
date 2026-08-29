@@ -418,7 +418,7 @@ function App() {
           <PracticeHistoryItem key={'midi-wave-sound'}>
             <PracticeInfo>
               <PracticeWeek>파도 소리</PracticeWeek>
-              <PracticeDate>#6 ㅈㅣㅂ (H O M E)</PracticeDate>
+              <PracticeDate>#10 Champagne Supernova</PracticeDate>
               {playingMember === `midi-wave-sound` && (
                 <ProgressBarContainer>
                   <ProgressBar style={{ width: `${progress}%` }} />
